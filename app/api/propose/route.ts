@@ -3,7 +3,7 @@ import { ProposeInput, arrange, proposeLive, seedKey, type PracticeSet } from "@
 import { verify } from "@/lib/verify";
 import { SEEDS } from "@/lib/seeds";
 
-export const maxDuration = 15;
+export const maxDuration = 30;
 
 function describe(e: unknown): string {
   if (e instanceof Error && e.name === "TimeoutError") return "timed out after 8s";

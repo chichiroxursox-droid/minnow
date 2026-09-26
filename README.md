@@ -43,7 +43,9 @@ Tests live in `lib/verify.test.ts` and run with the Node test runner: `npm test`
 
 ## The one AI call
 
-`lib/propose.ts` makes a single structured call with the AI SDK (`generateText` with `Output.object`) to Claude Haiku 4.5, schema `{ items: [{ word, sentence, kid_definition }] }`, with an 8 second timeout. Only the word is verified. The sentence and definition come from the model and are not checked.
+`lib/propose.ts` makes a structured call with the AI SDK (`generateText` with `Output.object`) to Claude Haiku 4.5, schema `{ items: [{ word, sentence, kid_definition }] }`, with an 8 second timeout, asking for twice the words needed. Only the word is verified. The sentence and definition come from the model and are not checked.
+
+If fewer words survive than were asked for, the rejected words and the dictionary's reasons go back to the model once ("carrot (K AE R AH T: 2 syllables, wanted 3)") with a request for replacements. Three-syllable sets almost always need this second round, because the model is poor at counting syllables. The status line says "in 2 rounds" when it happened.
 
 If the call fails or times out, `/api/propose` serves the cached seed for that target and says so on screen. If there is no seed for the target, it returns an error rather than inventing words.
 

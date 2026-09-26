@@ -224,7 +224,8 @@ export default function Home() {
         <section className="mt-8">
           <p className="text-sm text-stone-500">
             {set.source === "live" ? `Live from ${set.model}` : "Cached set"} · {label} · theme {set.input.theme} · age {set.input.age} ·{" "}
-            {set.proposed} proposed · {rejects.length} rejected · {passes.length} kept
+            {set.proposed} proposed{(set.rounds ?? 1) > 1 ? ` in ${set.rounds} rounds` : ""} · {rejects.length} rejected ·{" "}
+            {passes.length} kept
             {unverified.length ? ` · ${unverified.length} unverified` : ""}
           </p>
           {set.note && <p className="mt-1 text-sm text-amber-800">{set.note}</p>}

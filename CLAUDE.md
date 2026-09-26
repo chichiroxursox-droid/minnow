@@ -22,7 +22,7 @@ Next.js 15 App Router, TypeScript, Tailwind v4, `ai` + `@ai-sdk/anthropic` (gene
 - `scripts/demo-video.cjs` headless Playwright walk and recording of the demo path: `NODE_PATH=$(npm root -g) node scripts/demo-video.cjs [url] [outdir]`
 
 ## The one AI mechanism
-Input: `{ phoneme: ARPAbet, position: initial|medial|final, syllables: '1-2'|'3', theme, age, count }`. Ask the model for 2x count. Output schema: `{ items: [{ word, sentence, kid_definition }] }`. Then `verify()` runs on every word. A reject's reason is the dictionary's actual phonemes. A word missing from the dictionary is "unverified", never a verdict.
+Input: `{ phoneme: ARPAbet, position: initial|medial|final, syllables: '1-2'|'3', theme, age, count }`. Ask the model for 2x count. Output schema: `{ items: [{ word, sentence, kid_definition }] }`. Then `verify()` runs on every word. If fewer than count pass, send the rejects with the dictionary's reasons back once for replacements (two rounds max, 8s timeout per round). A reject's reason is the dictionary's actual phonemes. A word missing from the dictionary is "unverified", never a verdict.
 
 ## Rules
 - Never show a verdict the dictionary did not give.

@@ -15,7 +15,7 @@ Pick a sound, a position (initial, medial, final), a syllable range, a theme, an
 
 ## How I built it
 
-Next.js 15 on Vercel, one structured call to Claude Haiku 4.5 through the AI SDK, and a verifier in about 70 lines of TypeScript on top of the cmudict package. The verifier strips stress digits, checks the target phone's position, counts vowel phones for syllables, and optionally rejects consonant clusters. It has its own test suite under the Node test runner.
+Next.js 15 on Vercel, one structured call to Claude Haiku 4.5 through the AI SDK, and a verifier in about 70 lines of TypeScript on top of the cmudict package. The verifier strips stress digits, checks the target phone's position, counts vowel phones for syllables, and optionally rejects consonant clusters. It has its own test suite under the Node test runner. When too few words survive, the rejects and their phonemes go back to the model once for replacements, so the dictionary is feedback, not just a filter.
 
 ElevenLabs is the voice. Every verified word gets a Play button. Cached practice words were synthesized once with `eleven_flash_v2_5` and stored as MP3s in the repo. New words are voiced live through the ElevenLabs API, and live words that match a cached one reuse the file. A usage guard stops live synthesis before the free plan runs dry, so cached audio always keeps playing.
 
