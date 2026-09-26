@@ -52,3 +52,17 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: (1) checking ElevenLabs usage before every word hit a 429 on the subscription endpoint, and the script crashed before writing the JSON, so the first Haiku call was lost. Now the JSON is written before any TTS call, usage is checked once per run, and words are spaced 600ms. (2) The model read ARPAbet K as the letter k (kidney, kitten, kernel for ocean). Prompt now says the sound matters, not the spelling. Ten orphan MP3s from the first run stay on disk under the never-re-synthesize rule
 - Next step: build the page, wire /api/propose, /api/verify, /api/speak, deploy, walk the demo path on prod
 - Scope cuts applied so far: none
+
+### Sat 1:42pm, Hour 8 GATE and Hour 10 milestone
+- Milestone: both hit, 4h18m and 6h18m early against the 6:00pm and 8:00pm clocks
+- Done-when result: headless Playwright walk on https://minnow-chiethan.vercel.app: pre-filled /k/ initial ocean age 6 builds live from claude-haiku-4-5-20251001 (16 proposed, 0 rejected, 8 kept), check box rejects "knot" with "N AA T: starts with N, not K" and "ocean" with "OW SH AH N: starts with OW, not K", Play on a verified word shows the Playing state, and the /r/ medial farm preset builds live with 5 rejects rendered first (fern "F ER N: no R", tore "T AO R: R is only at the edge, not medial"). Three seeds cached with MP3s. ElevenLabs usage 63 of 10,000 characters
+- What broke: nothing on prod. Note the K ocean seed and live set had zero rejects this run, so the reject list is only visible on /k/ when the model slips; the check box and the /r/ and /s/ sets show it every time
+- Next step: convert the recording to H.264 at ~/Desktop/minnow-demo.mp4, check frames, tag v0-demo, README, DEVPOST
+- Scope cuts applied so far: none
+
+### Sat 1:58pm, Hour 12 milestone
+- Milestone: hit, 8h02m early against the 10:00pm clock
+- Done-when result: ~/Desktop/minnow-demo.mp4 exists, H.264 1280x800, 39.4s, recorded headlessly from the prod URL by scripts/demo-video.cjs. Frames checked at 6s intervals: Building state, check box verdicts, /r/ medial rejects first. Tagged v0-demo. Offline walk against a local server with all four env vars blanked also passes: cached set with a visible note, Play from the static MP3, /r/ cached set shows 3 rejects first
+- What broke: nothing
+- Next step: README and DEVPOST drafts, three clean prod runs including a phone viewport, tag v1
+- Scope cuts applied so far: none

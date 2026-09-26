@@ -10,7 +10,7 @@ Next.js 15 App Router, TypeScript, Tailwind v4, `ai` + `@ai-sdk/anthropic` (gene
 
 ## Layout
 - `app/page.tsx` form, preset chips, card list with rejects rendered first, check-a-word box, Play buttons
-- `app/api/propose/route.ts` Haiku generateObject with 8s timeout, verifies every word, falls back to the cached seed for that key
+- `app/api/propose/route.ts` Haiku structured output (`generateText` + `Output.object`, the current form of generateObject in ai v7) with 8s timeout, verifies every word, falls back to the cached seed for that key
 - `app/api/verify/route.ts` dictionary-only check for the check-a-word box, works with no keys
 - `app/api/speak/route.ts` ElevenLabs text to speech, returns audio/mpeg, refuses when usage passes the credit ceiling
 - `lib/verify.ts` cmudict verifier: strip stress digits, position check, vowel count, singleton option
@@ -18,8 +18,8 @@ Next.js 15 App Router, TypeScript, Tailwind v4, `ai` + `@ai-sdk/anthropic` (gene
 - `lib/ipa.ts` IPA to ARPAbet consonant map
 - `lib/seeds.ts` imports the cached seed JSON so the fallback works with every API key removed
 - `public/seeds/<key>.json` and `public/seeds/<key>/<word>.mp3` cached output for three targets
-- `scripts/make-seeds.mjs` generates seed JSON and MP3s once, skips any MP3 that already exists
-- `scripts/demo-video.cjs` headless Playwright recording of the demo path on the prod URL
+- `scripts/make-seeds.ts` generates seed JSON and MP3s once, skips any MP3 that already exists: `node --env-file=.env.local scripts/make-seeds.ts [key]`
+- `scripts/demo-video.cjs` headless Playwright walk and recording of the demo path: `NODE_PATH=$(npm root -g) node scripts/demo-video.cjs [url] [outdir]`
 
 ## The one AI mechanism
 Input: `{ phoneme: ARPAbet, position: initial|medial|final, syllables: '1-2'|'3', theme, age, count }`. Ask the model for 2x count. Output schema: `{ items: [{ word, sentence, kid_definition }] }`. Then `verify()` runs on every word. A reject's reason is the dictionary's actual phonemes. A word missing from the dictionary is "unverified", never a verdict.
