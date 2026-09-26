@@ -12,6 +12,8 @@ export const ProposeInput = z.object({
   age: z.number().int().min(2).max(18),
   count: z.number().int().min(1).max(12).default(8),
   singleton: z.boolean().default(false),
+  /** ARPAbet sound the child says instead of the target, for minimal pairs. Empty means none. */
+  contrast: z.string().regex(/^[A-Z]{0,2}$/).default(""),
 });
 export type ProposeInput = z.infer<typeof ProposeInput>;
 
@@ -29,6 +31,10 @@ export type SetItem = z.infer<typeof Items>["items"][number] & {
   verdict: Verdict;
   /** Path to a cached MP3 under /public/seeds, when one exists. */
   audio?: string;
+  /** Path to a cached illustration under /public/seeds, when one exists. */
+  image?: string;
+  /** Dictionary-derived minimal pair for the requested contrast sound, when one exists. */
+  pair?: { word: string; phones: string[]; audio?: string };
 };
 
 export type PracticeSet = {

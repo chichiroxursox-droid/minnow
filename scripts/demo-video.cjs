@@ -12,8 +12,9 @@ const size = device.viewport;
 
 (async () => {
   fs.mkdirSync(out, { recursive: true });
-  const browser = await chromium.launch();
-  const ctx = await browser.newContext({ ...device, recordVideo: { dir: out, size } });
+  // Fake microphone so "Your turn" works headlessly.
+  const browser = await chromium.launch({ args: ["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"] });
+  const ctx = await browser.newContext({ ...device, permissions: ["microphone"], recordVideo: { dir: out, size } });
   const page = await ctx.newPage();
   const shot = (name) => page.screenshot({ path: `${out}/${name}.png` });
   const pause = (ms) => page.waitForTimeout(ms);
@@ -46,13 +47,25 @@ const size = device.viewport;
   await typeCheck("coral");
   await shot("05-coral");
 
-  // Play a verified word.
+  // Play a verified word, then the child's turn, then hear it back.
   const play = page.getByRole("button", { name: /^Play / }).first();
   await play.scrollIntoViewIfNeeded();
   await play.click();
   await pause(700);
   await shot("06-playing");
   await pause(1800);
+  await page.getByRole("button", { name: /^Your turn / }).first().click();
+  await pause(600);
+  await shot("06b-listening");
+  await page.getByRole("button", { name: /^Play yours / }).first().waitFor({ timeout: 8000 });
+  await page.getByRole("button", { name: /^Play yours / }).first().click();
+  await pause(1500);
+  await shot("06c-played-back");
+  // Slow the model voice down.
+  await page.getByRole("button", { name: "Slow", exact: true }).click();
+  await play.click();
+  await pause(2500);
+  await shot("06d-slow");
 
   // Switch to the /r/ medial preset and build again.
   await page.getByRole("button", { name: /\/r\/ medial/ }).scrollIntoViewIfNeeded();

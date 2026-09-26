@@ -6,13 +6,14 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { proposeLive, seedKey, type PracticeSet, type ProposeInput } from "../lib/propose.ts";
 import { normalizeWord } from "../lib/verify.ts";
 import { assertUnderCeiling, synthesize, usage } from "../lib/tts.ts";
+import { COMMON_ERRORS, minimalPair } from "../lib/pairs.ts";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const TARGETS: ProposeInput[] = [
-  { phoneme: "K", position: "initial", syllables: "1-2", theme: "ocean", age: 6, count: 8, singleton: false },
-  { phoneme: "R", position: "medial", syllables: "1-2", theme: "farm", age: 7, count: 8, singleton: false },
-  { phoneme: "S", position: "final", syllables: "1-2", theme: "space", age: 8, count: 8, singleton: false },
+  { phoneme: "K", position: "initial", syllables: "1-2", theme: "ocean", age: 6, count: 8, singleton: false, contrast: "T" },
+  { phoneme: "R", position: "medial", syllables: "1-2", theme: "farm", age: 7, count: 8, singleton: false, contrast: "W" },
+  { phoneme: "S", position: "final", syllables: "1-2", theme: "space", age: 8, count: 8, singleton: false, contrast: "T" },
 ];
 
 const only = process.argv[2];
@@ -39,16 +40,28 @@ for (const input of TARGETS) {
   }
 
   await assertUnderCeiling();
-  for (const item of set.items) {
-    if (item.verdict.status !== "pass") continue;
-    const w = normalizeWord(item.word);
+  const speak = async (w: string) => {
     const file = `${dir}/${w}.mp3`;
     if (!existsSync(file)) {
       writeFileSync(file, Buffer.from(await synthesize(w, { checkUsage: false })));
       console.log(`  synthesized ${w}`);
       await sleep(600);
     }
-    item.audio = `/seeds/${key}/${w}.mp3`;
+    return `/seeds/${key}/${w}.mp3`;
+  };
+  const contrast = COMMON_ERRORS[input.phoneme] ?? "";
+  for (const item of set.items) {
+    if (item.verdict.status !== "pass") continue;
+    const w = normalizeWord(item.word);
+    item.audio = await speak(w);
+    // Illustrations are made separately by scripts/make-images.sh; attach any that exist.
+    const img = `${dir}/${w}.jpg`;
+    if (existsSync(img)) item.image = `/seeds/${key}/${w}.jpg`;
+    else delete item.image;
+    // Minimal pair for the typical error sound, voiced once so the demo works offline.
+    const pair = contrast ? minimalPair(w, input.phoneme, input.position, contrast) : null;
+    if (pair) item.pair = { ...pair, audio: await speak(pair.word) };
+    else delete item.pair;
   }
   writeFileSync(jsonPath, JSON.stringify(set, null, 2) + "\n");
   console.log(`  wrote ${jsonPath}`);

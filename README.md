@@ -13,8 +13,11 @@ An SLP picks a target sound (for example /k/), a word position (initial, medial,
 
 1. Claude Haiku 4.5 is asked for twice as many words as needed, each with a short practice sentence and a kid definition.
 2. Every proposed word is looked up in the CMU Pronouncing Dictionary and checked against the target. Rejects are listed first with the reason. Verified words are shown as practice cards, capped at the requested count. A short list is never padded.
-3. Each verified word has a Play button. Cached words play from a stored MP3. New words are voiced live through ElevenLabs.
-4. A check-a-word box lets the clinician type any word and get the dictionary's verdict instantly, no AI involved.
+3. Each verified word has a Play button. Cached words play from a stored MP3. New words are voiced live through ElevenLabs, at normal, slow, or slower speed.
+4. Pick what the child says instead of the target (it defaults to the usual pattern, /t/ for /k/, /w/ for /r/) and every verified word shows its minimal pair when the dictionary has one: cape and tape, bus and but.
+5. "Your turn" records the child for 2.5 seconds in the browser and plays it back next to the model. Nothing is uploaded or stored.
+6. Cached words have a picture. "Print homework" turns the verified cards into a sheet with a tally row.
+7. A check-a-word box lets the clinician type any word and get the dictionary's verdict, and its pair, instantly. No AI involved.
 
 Three practice sets are cached in the repo, so the app still works with every API key removed.
 
@@ -41,6 +44,10 @@ A reject's reason is built from the dictionary's phones, never from the model. E
 
 Tests live in `lib/verify.test.ts` and run with the Node test runner: `npm test`. They cover stress stripping, all three positions, syllable counting, the singleton option, and the missing-word case.
 
+## Minimal pairs
+
+Minimal pairs therapy contrasts the target with the sound the child produces instead. `lib/pairs.ts` swaps the target phone, at the position being drilled, for the child's error sound and looks the result up in a reverse index of the dictionary. Only a real dictionary word comes back, so "cape" gives "tape", "coast" gives "toast", "kite" gives "tight", "bus" gives "but", and "coral" gives nothing. The index is limited to `lib/common-words.json`, about 2,900 common words, because cmudict is full of surnames ("coral" would otherwise pair with "tearle"). That list was drafted once by Claude Haiku, filtered against the dictionary, and topped up with a hand list of classic minimal-pair words. Tests are in `lib/pairs.test.ts`.
+
 ## The one AI call
 
 `lib/propose.ts` makes a structured call with the AI SDK (`generateText` with `Output.object`) to Claude Haiku 4.5, schema `{ items: [{ word, sentence, kid_definition }] }`, with an 8 second timeout, asking for twice the words needed. Only the word is verified. The sentence and definition come from the model and are not checked.
@@ -51,9 +58,17 @@ If the call fails or times out, `/api/propose` serves the cached seed for that t
 
 ## Voice
 
-`/api/speak` calls the ElevenLabs text to speech API with `eleven_flash_v2_5` and returns `audio/mpeg`. Each cached practice word was synthesized once and stored under `public/seeds/<key>/<word>.mp3`. Live words that match a cached word reuse the file. Live synthesis stops when the account passes 7,000 of the free plan's 10,000 monthly characters, and cached words keep playing.
+`/api/speak` calls the ElevenLabs text to speech API with `eleven_flash_v2_5` and returns `audio/mpeg`. Each cached practice word and its minimal pair was synthesized once and stored under `public/seeds/<key>/<word>.mp3`. Live words that match a cached word reuse the file. The voice speed control (normal, slow, slower) uses the ElevenLabs `speed` voice setting; slowed words are always live calls. Live synthesis stops when the account passes 7,000 of the free plan's 10,000 monthly characters, and cached words keep playing.
 
 Voice audio is generated with ElevenLabs: https://elevenlabs.io
+
+## Your turn
+
+Each verified card has a "Your turn" button. It records 2.5 seconds from the microphone with the browser's MediaRecorder, keeps the clip in memory as an object URL, and offers "Play yours" next to the model's Play. Nothing leaves the browser tab. There is no scoring on purpose: speech recognition normalizes articulation errors, so it would grade a lisp as correct.
+
+## Pictures
+
+Each cached word has a flat illustration made once with Nano Banana 2 through kie.ai (`scripts/make-images.sh`), stored at 512px under `public/seeds/<key>/<word>.jpg`. Live words that match a cached word reuse the picture. Other live words have no picture rather than a wrong one.
 
 ## Run it locally
 
@@ -83,15 +98,18 @@ Stack: Next.js 15 App Router, TypeScript, Tailwind v4, AI SDK 7 with `@ai-sdk/an
 - There is no dialect variation. A non-rhotic speaker's /r/, a regional vowel, or a child's own production are not modeled.
 - The dictionary has about 135,000 entries. Real words that are missing come back as unverified, not as rejects.
 - Only the word is verified. Sentences and kid definitions are model output.
+- Minimal pairs only come from the common-word list, so some real pairs are missed. Medial /r/ rarely has a pair in English.
+- Pictures exist only for cached words. "Your turn" plays back, it does not judge.
 - Syllables are counted from vowel phones, which is right for cmudict transcriptions but is not a clinical syllabification.
 - Minnow is a drafting tool for clinicians. It is not a clinical or diagnostic instrument and it does not store, ask for, or process any patient or child data.
 
 ## AI disclosure
 
-This project was built with Claude Code, Anthropic's coding agent, working from a written spec and milestone plan by the author. At runtime it uses Claude Haiku 4.5 to propose words and ElevenLabs to voice them. The dictionary verification is deterministic code with no AI in the loop.
+This project was built with Claude Code, Anthropic's coding agent, working from a written spec and milestone plan by the author. At runtime it uses Claude Haiku 4.5 to propose words and ElevenLabs to voice them. The dictionary verification and the minimal pairs are deterministic code with no AI in the loop. The common-word list was drafted once by Claude Haiku and the cached pictures were made once with Nano Banana 2 via kie.ai.
 
 ## Credits
 
 - Voice: ElevenLabs, https://elevenlabs.io
+- Pictures: Nano Banana 2 via kie.ai
 - Dictionary: the CMU Pronouncing Dictionary via the `cmu-pronouncing-dictionary` npm package
 - Words, sentences, and definitions: Claude Haiku 4.5 by Anthropic

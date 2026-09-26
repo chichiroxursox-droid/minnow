@@ -40,7 +40,8 @@
           "B"
         ]
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/crab.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/crab.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/crab.jpg"
     },
     {
       "word": "coral",
@@ -57,7 +58,8 @@
           "L"
         ]
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/coral.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/coral.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/coral.jpg"
     },
     {
       "word": "kayak",
@@ -137,7 +139,16 @@
           "T"
         ]
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/kite.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/kite.mp3",
+      "pair": {
+        "word": "tight",
+        "phones": [
+          "T",
+          "AY",
+          "T"
+        ],
+        "audio": "/seeds/k-initial-1-2-ocean-6/tight.mp3"
+      }
     },
     {
       "word": "coast",
@@ -153,7 +164,17 @@
           "T"
         ]
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/coast.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/coast.mp3",
+      "pair": {
+        "word": "toast",
+        "phones": [
+          "T",
+          "OW",
+          "S",
+          "T"
+        ],
+        "audio": "/seeds/k-initial-1-2-ocean-6/toast.mp3"
+      }
     },
     {
       "word": "cork",
@@ -199,7 +220,16 @@
           "UW"
         ]
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/crew.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/crew.mp3",
+      "pair": {
+        "word": "true",
+        "phones": [
+          "T",
+          "R",
+          "UW"
+        ],
+        "audio": "/seeds/k-initial-1-2-ocean-6/true.mp3"
+      }
     },
     {
       "word": "catch",

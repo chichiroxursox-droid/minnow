@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { ProposeInput, arrange, proposeLive, seedKey, type PracticeSet } from "@/lib/propose";
 import { verify } from "@/lib/verify";
+import { minimalPair } from "@/lib/pairs";
 import { SEEDS } from "@/lib/seeds";
 
 export const maxDuration = 30;
@@ -10,12 +11,29 @@ function describe(e: unknown): string {
   return (e instanceof Error ? e.message : String(e)).slice(0, 120);
 }
 
-/** Reuse cached MP3s for any live word that also appears in the seed for this target. */
-function attachAudio(set: PracticeSet, seed: PracticeSet) {
-  const audio = new Map(seed.items.filter((i) => i.audio).map((i) => [i.word.toLowerCase(), i.audio!]));
-  for (const item of set.items) {
-    const a = audio.get(item.word.toLowerCase());
-    if (a && item.verdict.status === "pass") item.audio = a;
+/**
+ * Attach what the seed has cached (MP3s, illustrations, pair MP3s) to any matching word, and
+ * compute the minimal pair for the requested contrast on every verified word.
+ */
+function decorate(set: PracticeSet, input: ProposeInput, seed?: PracticeSet) {
+  const audio = new Map<string, string>();
+  const image = new Map<string, string>();
+  for (const it of seed?.items ?? []) {
+    const w = it.word.toLowerCase();
+    if (it.audio) audio.set(w, it.audio);
+    if (it.image) image.set(w, it.image);
+    if (it.pair?.audio) audio.set(it.pair.word, it.pair.audio);
+  }
+  for (const it of set.items) {
+    delete it.audio;
+    delete it.image;
+    delete it.pair;
+    if (it.verdict.status !== "pass") continue;
+    const w = it.word.toLowerCase();
+    if (audio.has(w)) it.audio = audio.get(w);
+    if (image.has(w)) it.image = image.get(w);
+    const pair = input.contrast ? minimalPair(w, input.phoneme, input.position, input.contrast) : null;
+    if (pair) it.pair = { ...pair, ...(audio.has(pair.word) ? { audio: audio.get(pair.word) } : {}) };
   }
 }
 
@@ -29,7 +47,7 @@ export async function POST(req: Request) {
   if (process.env.ANTHROPIC_API_KEY) {
     try {
       const set = await proposeLive(input);
-      if (seed) attachAudio(set, seed);
+      decorate(set, input, seed);
       return NextResponse.json(set);
     } catch (e) {
       console.error("propose live failed", e);
@@ -41,8 +59,13 @@ export async function POST(req: Request) {
 
   if (seed) {
     // Re-verify against the requested target so a different singleton setting still gets honest verdicts.
-    const items = arrange(seed.items.map((it) => ({ ...it, verdict: verify(it.word, input) })), input.count);
-    return NextResponse.json({ ...seed, input, items, note });
+    const items = arrange(
+      seed.items.map((it) => ({ ...it, verdict: verify(it.word, input) })),
+      input.count,
+    );
+    const set: PracticeSet = { ...seed, input, items, note };
+    decorate(set, input, seed);
+    return NextResponse.json(set);
   }
   return NextResponse.json(
     { error: `${note.replace(" Showing the cached set.", "")} There is no cached set for this target.` },

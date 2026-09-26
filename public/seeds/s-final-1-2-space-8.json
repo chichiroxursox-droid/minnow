@@ -72,7 +72,16 @@
           "S"
         ]
       },
-      "audio": "/seeds/s-final-1-2-space-8/pass.mp3"
+      "audio": "/seeds/s-final-1-2-space-8/pass.mp3",
+      "pair": {
+        "word": "pat",
+        "phones": [
+          "P",
+          "AE",
+          "T"
+        ],
+        "audio": "/seeds/s-final-1-2-space-8/pat.mp3"
+      }
     },
     {
       "word": "class",
@@ -118,7 +127,16 @@
           "S"
         ]
       },
-      "audio": "/seeds/s-final-1-2-space-8/mass.mp3"
+      "audio": "/seeds/s-final-1-2-space-8/mass.mp3",
+      "pair": {
+        "word": "mat",
+        "phones": [
+          "M",
+          "AE",
+          "T"
+        ],
+        "audio": "/seeds/s-final-1-2-space-8/mat.mp3"
+      }
     },
     {
       "word": "bus",
@@ -133,7 +151,16 @@
           "S"
         ]
       },
-      "audio": "/seeds/s-final-1-2-space-8/bus.mp3"
+      "audio": "/seeds/s-final-1-2-space-8/bus.mp3",
+      "pair": {
+        "word": "but",
+        "phones": [
+          "B",
+          "AH",
+          "T"
+        ],
+        "audio": "/seeds/s-final-1-2-space-8/but.mp3"
+      }
     },
     {
       "word": "loss",

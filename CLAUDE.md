@@ -16,6 +16,9 @@ Next.js 15 App Router, TypeScript, Tailwind v4, `ai` + `@ai-sdk/anthropic` (gene
 - `lib/verify.ts` cmudict verifier: strip stress digits, position check, vowel count, singleton option
 - `lib/verify.test.ts` `node --test lib/verify.test.ts`, must stay green
 - `lib/ipa.ts` IPA to ARPAbet consonant map
+- `lib/pairs.ts` dictionary-derived minimal pairs, limited to `lib/common-words.json`; `lib/pairs.test.ts`
+- `scripts/make-common-words.ts` drafts the common-word list with one Haiku call, merges, filters against cmudict; `--no-model` merges the built-in core list only
+- `scripts/make-images.sh` one flat illustration per cached word via the local nano-banana-kie CLI (kie.ai, about 8 credits each), 512px jpg into public/seeds
 - `lib/seeds.ts` imports the cached seed JSON so the fallback works with every API key removed
 - `public/seeds/<key>.json` and `public/seeds/<key>/<word>.mp3` cached output for three targets
 - `scripts/make-seeds.ts` generates seed JSON and MP3s once, skips any MP3 that already exists: `node --env-file=.env.local scripts/make-seeds.ts [key]`

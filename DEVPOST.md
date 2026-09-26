@@ -11,7 +11,7 @@ Speech-language pathologists build articulation practice sets by hand: eight wor
 
 ## What it does
 
-Pick a sound, a position (initial, medial, final), a syllable range, a theme, and an age. Claude Haiku 4.5 proposes twice as many words as you asked for, each with a short sentence and a kid definition. Every word is looked up in the CMU Pronouncing Dictionary and checked against the target. Rejected words are shown first, struck through, with the dictionary's actual phonemes as the reason: "N AA T: starts with N, not K." Verified words become practice cards with a Play button, voiced by ElevenLabs. A check-a-word box gives an instant verdict on anything the clinician types, with no AI involved.
+Pick a sound, a position (initial, medial, final), a syllable range, a theme, and an age. Claude Haiku 4.5 proposes twice as many words as you asked for, each with a short sentence and a kid definition. Every word is looked up in the CMU Pronouncing Dictionary and checked against the target. Rejected words are shown first, struck through, with the dictionary's actual phonemes as the reason: "N AA T: starts with N, not K." Verified words become picture cards with a Play button, voiced by ElevenLabs at normal or slow speed. Pick what the child says instead of the target and every card shows its real minimal pair from the dictionary: cape and tape, bus and but. "Your turn" records the child in the browser and plays both back; nothing is uploaded. One click prints a homework sheet. A check-a-word box gives an instant verdict on anything the clinician types, with no AI involved.
 
 ## How I built it
 
@@ -23,7 +23,7 @@ Three practice sets ship cached, so the whole demo path, including Play, works w
 
 ## Challenges
 
-The model reads ARPAbet "K" as the letter k and offers "kidney" for an ocean theme, so the prompt now says the sound matters, not the spelling. The Vercel team had deployment protection on by default and the production URL redirected to a login page until I turned it off through the API. Checking ElevenLabs usage before every word tripped a rate limit and lost a batch, so the seed script now saves the proposal before any voice call.
+The model reads ARPAbet "K" as the letter k and offers "kidney" for an ocean theme, so the prompt says the sound matters, not the spelling. It cannot count syllables at all; three-syllable sets came back almost empty until the rejects were fed back. Minimal pairs from the raw dictionary paired "coral" with the surname "tearle", so pairs are limited to a common-word list.
 
 ## What I learned
 
