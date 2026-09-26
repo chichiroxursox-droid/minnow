@@ -57,11 +57,17 @@ Voice audio is generated with ElevenLabs: https://elevenlabs.io
 
 ```
 npm install
-cp .env.example .env.local   # then fill in the four values
 npm run dev
 ```
 
-`.env.local` needs `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` (`claude-haiku-4-5-20251001`), `ELEVENLABS_API_KEY`, and `ELEVENLABS_VOICE_ID`. With no keys the app still runs on the cached seeds.
+Create `.env.local` with these four lines. The file is gitignored. With no keys the app still runs on the cached seeds.
+
+```
+ANTHROPIC_API_KEY=...
+ANTHROPIC_MODEL=claude-haiku-4-5-20251001
+ELEVENLABS_API_KEY=...
+ELEVENLABS_VOICE_ID=...
+```
 
 - `npm test` runs the verifier tests.
 - `node --env-file=.env.local scripts/make-seeds.ts` regenerates seed JSON and MP3s, reusing anything that already exists.

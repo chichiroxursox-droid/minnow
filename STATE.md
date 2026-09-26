@@ -5,23 +5,26 @@ Read this file first at every session start. Append after every milestone. Never
 Rule: if a milestone is 90 minutes late, apply the next item in the scope cut order and log it.
 
 ## NEEDED FROM ETHAN
-- (nothing yet)
+- Submit on Devpost before Sun 9:15am EDT. Paste DEVPOST.md, prod URL https://minnow-chiethan.vercel.app, repo https://github.com/chichiroxursox-droid/minnow, track Health and Wellness, prize Best Use of ElevenLabs. Screenshot the confirmation.
+- Upload ~/Desktop/minnow-demo.mp4 unlisted to YouTube for the Devpost video field (needs your account). The file is H.264, 39s, no audio track; it is the backup, the live demo has sound.
+- Optional: point minnowwords.com at the Vercel project minnow (team chiethan) and add the domain in the dashboard. Not blocking.
+- Before the live demo: open the prod URL on your laptop and phone once, pair the Bluetooth speaker, and press Play on a cached word to confirm audio. Live words cost ElevenLabs characters; usage was 63 of 10,000 at 2:00pm Saturday.
 
 ## Milestones (bell was Sat Sept 26 10:00am EDT; this build started 11:57am)
 
 | Clock | Hour | Done-when | Status |
 |---|---|---|---|
-| Sat 11:00am | 1 | Repo live, deployed to prod once, hello world on the real URL | |
-| Sat 1:00pm | 3 | Verifier works in isolation with a passing `node --test` | |
-| Sat 3:00pm | 5 | The one AI call returns valid typed output, cached seed saved | |
-| Sat 6:00pm | 8 | GATE: a judge could use it end to end on the prod URL | |
-| Sat 8:00pm | 10 | ElevenLabs Play load-bearing and visible. No new dependencies after this | |
-| Sat 10:00pm | 12 | First backup recording saved. Tagged v0-demo | |
-| Sun 12:30am | 14.5 | README first draft done | |
-| Sun 6:00am | 20 | Code freeze. Tagged v1. Bug fixes only | |
-| Sun 7:00am | 21 | Demo run clean on prod three times | |
-| Sun 8:00am | 22 | Final backup video at ~/Desktop/minnow-demo.mp4. Hard stop on code | |
-| Sun 9:15am | 23 | SUBMITTED | |
+| Sat 11:00am | 1 | Repo live, deployed to prod once, hello world on the real URL |  hit 12:26pm (86 min late) |
+| Sat 1:00pm | 3 | Verifier works in isolation with a passing `node --test` |  hit 12:36pm |
+| Sat 3:00pm | 5 | The one AI call returns valid typed output, cached seed saved |  hit 1:12pm |
+| Sat 6:00pm | 8 | GATE: a judge could use it end to end on the prod URL |  hit 1:42pm |
+| Sat 8:00pm | 10 | ElevenLabs Play load-bearing and visible. No new dependencies after this |  hit 1:42pm |
+| Sat 10:00pm | 12 | First backup recording saved. Tagged v0-demo |  hit 1:58pm, v0-demo |
+| Sun 12:30am | 14.5 | README first draft done |  hit 2:10pm |
+| Sun 6:00am | 20 | Code freeze. Tagged v1. Bug fixes only |  hit 2:15pm, v1 |
+| Sun 7:00am | 21 | Demo run clean on prod three times |  hit 2:12pm |
+| Sun 8:00am | 22 | Final backup video at ~/Desktop/minnow-demo.mp4. Hard stop on code |  hit 1:58pm (same file) |
+| Sun 9:15am | 23 | SUBMITTED |  NEEDS ETHAN |
 
 ## Log
 
@@ -65,4 +68,32 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - Done-when result: ~/Desktop/minnow-demo.mp4 exists, H.264 1280x800, 39.4s, recorded headlessly from the prod URL by scripts/demo-video.cjs. Frames checked at 6s intervals: Building state, check box verdicts, /r/ medial rejects first. Tagged v0-demo. Offline walk against a local server with all four env vars blanked also passes: cached set with a visible note, Play from the static MP3, /r/ cached set shows 3 rejects first
 - What broke: nothing
 - Next step: README and DEVPOST drafts, three clean prod runs including a phone viewport, tag v1
+- Scope cuts applied so far: none
+
+### Sat 2:10pm, Hour 14.5 milestone
+- Milestone: hit, 10h20m early against the Sun 12:30am clock
+- Done-when result: README.md covers what it does, how the dictionary check works with a worked examples table, the one AI call, voice and caching, local run steps, limitations (US English only, no dialect variation, first pronunciation only, not a clinical tool, no child data), an AI disclosure (built with Claude Code; runtime Claude Haiku 4.5 and ElevenLabs), and the ElevenLabs attribution with a link. DEVPOST.md is 569 words and names the Health and Wellness track and Best Use of ElevenLabs. No em dashes in README, DEVPOST, UI copy, CLAUDE.md, or STATE.md
+- What broke: I wrote a .env.example that .gitignore's .env* rule blocks. Removed it; README now shows the four lines to create by hand
+- Next step: three clean prod runs, tag v1, final deploy
+- Scope cuts applied so far: none
+
+### Sat 2:12pm, Hour 21 milestone
+- Milestone: hit, 16h48m early against the Sun 7:00am clock
+- Done-when result: scripts/demo-video.cjs ran clean on https://minnow-chiethan.vercel.app three times at 1280x800 and once at an iPhone 13 viewport, exit 0 with no errors each time. Each run builds the /k/ initial ocean set live, rejects knot and ocean in the check box, plays a word, and builds the /r/ medial farm set live with rejects first. Phone layout checked by screenshot
+- What broke: nothing
+- Next step: tag v1 and deploy
+- Scope cuts applied so far: none
+
+### Sat 2:15pm, Hour 20 code freeze and Hour 22 final video
+- Milestone: both hit early. Tagged v1 on the last commit. No code changes after this, only docs if needed. Hard stop for code stays Sun 8:00am EDT
+- Done-when result: `npm test` 7 pass 0 fail; `next build` clean; prod deployed from main HEAD; ~/Desktop/minnow-demo.mp4 (H.264, 1280x800, 39.4s, frames checked) was recorded from the same app code that is on prod, so it stands as the final backup video
+- What broke: nothing
+- Next step: Ethan submits on Devpost, see NEEDED FROM ETHAN at the top
+- Scope cuts applied so far: none. Everything in the kit's layout shipped except HALLWAY.md (no hallway testing happened) and shadcn/ui (plain Tailwind instead)
+
+### Sat 2:15pm, Hour 23 submission
+- Milestone: NOT DONE by Claude Code, needs Ethan. Devpost submission requires his account
+- Done-when result: everything the submission needs exists: prod URL, public repo, DEVPOST.md text, backup video on the Desktop
+- What broke: nothing
+- Next step: submit before Sun 9:15am EDT and screenshot the confirmation
 - Scope cuts applied so far: none
