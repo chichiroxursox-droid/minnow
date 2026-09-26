@@ -111,3 +111,10 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: (1) raw cmudict paired "coral" with the surname "tearle", so pairs are limited to lib/common-words.json (2,941 words: two Haiku drafts filtered against cmudict plus a built-in core list). (2) Structured output for the word list hit the token limit and lost everything; switched to plain text, one word per line. (3) Homebrew ffmpeg has no webp encoder; pictures are 512px jpg. (4) make-seeds.ts targets needed the new contrast field to type-check
 - Next step: Ethan decides on the picture batch (about 20 more images fit the remaining credits). Then run scripts/make-images.sh, scripts/make-seeds.ts, redeploy, re-record
 - Scope cuts applied so far: none
+
+### Sat 3:40pm, v1.3 visual pass (Ethan asked for more visual appeal, via /impeccable, direction "Tidepool")
+- Milestone: restyle shipped and deployed. Tagged v1.3. Freeze still Sun 8:00am
+- Done-when result: warm paper background, sea-teal for actions and verified words, coral for rejects, Fraunces display type for the wordmark and practice words, Inter for UI, JetBrains Mono for phonemes, all self-hosted through next/font. One authored motion: a new set rises into place. Behavior, copy, test ids, and button names unchanged, so the demo walk script still passes. Build clean, offline desktop and mobile walks pass, Impeccable detector reports no findings, prod walk passes, ~/Desktop/minnow-demo.mp4 re-recorded (H.264, 51.3s, frames checked)
+- What broke: first inspection round found five defects, fixed in one batch: uneven control heights misaligned the form labels, the fish mark read like a cursor, the status line doubled its separators, grid cards stretched to the tallest neighbor, and an uppercase label turned IPA /k/ into /K/. The Impeccable skill update to v4.4.0 failed with an HTTP 404 on the bundle; still on v4.0.4
+- Next step: Ethan decides on the picture batch (about 20 images fit the remaining kie credits). Then submit
+- Scope cuts applied so far: none
