@@ -1,0 +1,273 @@
+{
+  "key": "k-initial-1-2-ocean-6",
+  "input": {
+    "phoneme": "K",
+    "position": "initial",
+    "syllables": "1-2",
+    "theme": "ocean",
+    "age": 6,
+    "count": 8,
+    "singleton": false
+  },
+  "items": [
+    {
+      "word": "kelp",
+      "sentence": "The kelp grows in the ocean.",
+      "kid_definition": "A long green plant that lives in the water.",
+      "verdict": {
+        "status": "pass",
+        "word": "kelp",
+        "phones": [
+          "K",
+          "EH",
+          "L",
+          "P"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/kelp.mp3"
+    },
+    {
+      "word": "crab",
+      "sentence": "A crab walks on the sandy ocean floor.",
+      "kid_definition": "A hard-shelled animal with ten legs that lives in water.",
+      "verdict": {
+        "status": "pass",
+        "word": "crab",
+        "phones": [
+          "K",
+          "R",
+          "AE",
+          "B"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/crab.mp3"
+    },
+    {
+      "word": "coral",
+      "sentence": "Coral is colorful and grows underwater.",
+      "kid_definition": "A hard bumpy thing that fish hide in underwater.",
+      "verdict": {
+        "status": "pass",
+        "word": "coral",
+        "phones": [
+          "K",
+          "AO",
+          "R",
+          "AH",
+          "L"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/coral.mp3"
+    },
+    {
+      "word": "kayak",
+      "sentence": "We paddled our kayak on the ocean.",
+      "kid_definition": "A small boat that you row with a paddle.",
+      "verdict": {
+        "status": "pass",
+        "word": "kayak",
+        "phones": [
+          "K",
+          "AY",
+          "AE",
+          "K"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/kayak.mp3"
+    },
+    {
+      "word": "current",
+      "sentence": "The ocean current pushed our boat.",
+      "kid_definition": "Water that moves in one direction like a river.",
+      "verdict": {
+        "status": "pass",
+        "word": "current",
+        "phones": [
+          "K",
+          "ER",
+          "AH",
+          "N",
+          "T"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/current.mp3"
+    },
+    {
+      "word": "cove",
+      "sentence": "We swam in the quiet cove.",
+      "kid_definition": "A small bay or area of water surrounded by land.",
+      "verdict": {
+        "status": "pass",
+        "word": "cove",
+        "phones": [
+          "K",
+          "OW",
+          "V"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/cove.mp3"
+    },
+    {
+      "word": "cabin",
+      "sentence": "We stayed in a cabin by the ocean.",
+      "kid_definition": "A small house usually made of wood.",
+      "verdict": {
+        "status": "pass",
+        "word": "cabin",
+        "phones": [
+          "K",
+          "AE",
+          "B",
+          "AH",
+          "N"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/cabin.mp3"
+    },
+    {
+      "word": "kite",
+      "sentence": "My kite flew over the beach.",
+      "kid_definition": "A toy that flies in the air on a string.",
+      "verdict": {
+        "status": "pass",
+        "word": "kite",
+        "phones": [
+          "K",
+          "AY",
+          "T"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/kite.mp3"
+    },
+    {
+      "word": "coast",
+      "sentence": "The coast has rocks and sandy beaches.",
+      "kid_definition": "The land where the ocean meets the shore.",
+      "verdict": {
+        "status": "pass",
+        "word": "coast",
+        "phones": [
+          "K",
+          "OW",
+          "S",
+          "T"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/coast.mp3"
+    },
+    {
+      "word": "cork",
+      "sentence": "The cork floated on top of the water.",
+      "kid_definition": "A light material that floats and doesn't sink.",
+      "verdict": {
+        "status": "pass",
+        "word": "cork",
+        "phones": [
+          "K",
+          "AO",
+          "R",
+          "K"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/cork.mp3"
+    },
+    {
+      "word": "calm",
+      "sentence": "The ocean was calm and blue.",
+      "kid_definition": "Peaceful and quiet without waves or wind.",
+      "verdict": {
+        "status": "pass",
+        "word": "calm",
+        "phones": [
+          "K",
+          "AA",
+          "M"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/calm.mp3"
+    },
+    {
+      "word": "crew",
+      "sentence": "The ship's crew sailed across the ocean.",
+      "kid_definition": "The people who work together on a boat.",
+      "verdict": {
+        "status": "pass",
+        "word": "crew",
+        "phones": [
+          "K",
+          "R",
+          "UW"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/crew.mp3"
+    },
+    {
+      "word": "catch",
+      "sentence": "We caught fish in our net.",
+      "kid_definition": "To grab or take something that is moving.",
+      "verdict": {
+        "status": "pass",
+        "word": "catch",
+        "phones": [
+          "K",
+          "AE",
+          "CH"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/catch.mp3"
+    },
+    {
+      "word": "kid",
+      "sentence": "The kid played in the ocean waves.",
+      "kid_definition": "A young person or child.",
+      "verdict": {
+        "status": "pass",
+        "word": "kid",
+        "phones": [
+          "K",
+          "IH",
+          "D"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/kid.mp3"
+    },
+    {
+      "word": "cooler",
+      "sentence": "We packed a cooler with cold drinks.",
+      "kid_definition": "A box that keeps things cold and fresh.",
+      "verdict": {
+        "status": "pass",
+        "word": "cooler",
+        "phones": [
+          "K",
+          "UW",
+          "L",
+          "ER"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/cooler.mp3"
+    },
+    {
+      "word": "kingdom",
+      "sentence": "Fish rule the ocean kingdom.",
+      "kid_definition": "A large area ruled by a king or queen.",
+      "verdict": {
+        "status": "pass",
+        "word": "kingdom",
+        "phones": [
+          "K",
+          "IH",
+          "NG",
+          "D",
+          "AH",
+          "M"
+        ]
+      },
+      "audio": "/seeds/k-initial-1-2-ocean-6/kingdom.mp3"
+    }
+  ],
+  "source": "seed",
+  "model": "claude-haiku-4-5-20251001",
+  "generatedAt": "2026-09-26T16:33:33.920Z",
+  "proposed": 16
+}

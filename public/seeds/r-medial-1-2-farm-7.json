@@ -1,0 +1,198 @@
+{
+  "key": "r-medial-1-2-farm-7",
+  "input": {
+    "phoneme": "R",
+    "position": "medial",
+    "syllables": "1-2",
+    "theme": "farm",
+    "age": 7,
+    "count": 8,
+    "singleton": false
+  },
+  "items": [
+    {
+      "word": "turkey",
+      "sentence": "The turkey walked around the farm yard.",
+      "kid_definition": "A large farm bird that has feathers and a tail.",
+      "verdict": {
+        "status": "fail",
+        "word": "turkey",
+        "phones": [
+          "T",
+          "ER",
+          "K",
+          "IY"
+        ],
+        "reason": "T ER K IY: no R"
+      }
+    },
+    {
+      "word": "worry",
+      "sentence": "Farmers worry when it does not rain enough.",
+      "kid_definition": "To feel nervous or scared about something bad.",
+      "verdict": {
+        "status": "fail",
+        "word": "worry",
+        "phones": [
+          "W",
+          "ER",
+          "IY"
+        ],
+        "reason": "W ER IY: no R"
+      }
+    },
+    {
+      "word": "dirty",
+      "sentence": "My clothes get dirty when I play in the barn.",
+      "kid_definition": "Not clean and covered with mud or dust.",
+      "verdict": {
+        "status": "fail",
+        "word": "dirty",
+        "phones": [
+          "D",
+          "ER",
+          "T",
+          "IY"
+        ],
+        "reason": "D ER T IY: no R"
+      }
+    },
+    {
+      "word": "barn",
+      "sentence": "The horse sleeps in the big barn.",
+      "kid_definition": "A large building where farmers keep animals and hay.",
+      "verdict": {
+        "status": "pass",
+        "word": "barn",
+        "phones": [
+          "B",
+          "AA",
+          "R",
+          "N"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/barn.mp3"
+    },
+    {
+      "word": "corn",
+      "sentence": "We grow corn in the farm field.",
+      "kid_definition": "A tall yellow grain plant that farmers grow to eat.",
+      "verdict": {
+        "status": "pass",
+        "word": "corn",
+        "phones": [
+          "K",
+          "AO",
+          "R",
+          "N"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/corn.mp3"
+    },
+    {
+      "word": "horse",
+      "sentence": "The brown horse runs very fast.",
+      "kid_definition": "A large farm animal with four legs that people ride.",
+      "verdict": {
+        "status": "pass",
+        "word": "horse",
+        "phones": [
+          "HH",
+          "AO",
+          "R",
+          "S"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/horse.mp3"
+    },
+    {
+      "word": "porch",
+      "sentence": "We sit on the farm house porch.",
+      "kid_definition": "A covered area at the front of a house.",
+      "verdict": {
+        "status": "pass",
+        "word": "porch",
+        "phones": [
+          "P",
+          "AO",
+          "R",
+          "CH"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/porch.mp3"
+    },
+    {
+      "word": "garden",
+      "sentence": "Mom planted carrots in the garden.",
+      "kid_definition": "A place where you grow vegetables and flowers.",
+      "verdict": {
+        "status": "pass",
+        "word": "garden",
+        "phones": [
+          "G",
+          "AA",
+          "R",
+          "D",
+          "AH",
+          "N"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/garden.mp3"
+    },
+    {
+      "word": "orange",
+      "sentence": "The orange pumpkin sat in the field.",
+      "kid_definition": "A bright color that is between red and yellow.",
+      "verdict": {
+        "status": "pass",
+        "word": "orange",
+        "phones": [
+          "AO",
+          "R",
+          "AH",
+          "N",
+          "JH"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/orange.mp3"
+    },
+    {
+      "word": "morning",
+      "sentence": "I wake up every morning to help on the farm.",
+      "kid_definition": "The time when the sun comes up and the day starts.",
+      "verdict": {
+        "status": "pass",
+        "word": "morning",
+        "phones": [
+          "M",
+          "AO",
+          "R",
+          "N",
+          "IH",
+          "NG"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/morning.mp3"
+    },
+    {
+      "word": "narrow",
+      "sentence": "The fence goes down a narrow farm path.",
+      "kid_definition": "Not very wide or not wide at all.",
+      "verdict": {
+        "status": "pass",
+        "word": "narrow",
+        "phones": [
+          "N",
+          "EH",
+          "R",
+          "OW"
+        ]
+      },
+      "audio": "/seeds/r-medial-1-2-farm-7/narrow.mp3"
+    }
+  ],
+  "proposed": 16,
+  "source": "seed",
+  "model": "claude-haiku-4-5-20251001",
+  "generatedAt": "2026-09-26T16:40:43.793Z"
+}

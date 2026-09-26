@@ -45,3 +45,10 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: nothing. Node 24 runs the .ts test directly; tsconfig needed allowImportingTsExtensions so next build type-checks the test import
 - Next step: lib/propose.ts with generateObject + 8s timeout, /api/propose route, scripts/make-seeds.mjs, first seed JSON for K initial ocean age 6
 - Scope cuts applied so far: none
+
+### Sat 1:12pm, Hour 5 milestone
+- Milestone: hit, 1h48m early against the 3:00pm clock
+- Done-when result: `node --env-file=.env.local scripts/make-seeds.ts k-initial-1-2-ocean-6` produced public/seeds/k-initial-1-2-ocean-6.json (16 items from claude-haiku-4-5-20251001, all 16 verified) plus 16 MP3s. ElevenLabs usage 28 of 10,000 characters after seeding
+- What broke: (1) checking ElevenLabs usage before every word hit a 429 on the subscription endpoint, and the script crashed before writing the JSON, so the first Haiku call was lost. Now the JSON is written before any TTS call, usage is checked once per run, and words are spaced 600ms. (2) The model read ARPAbet K as the letter k (kidney, kitten, kernel for ocean). Prompt now says the sound matters, not the spelling. Ten orphan MP3s from the first run stay on disk under the never-re-synthesize rule
+- Next step: build the page, wire /api/propose, /api/verify, /api/speak, deploy, walk the demo path on prod
+- Scope cuts applied so far: none

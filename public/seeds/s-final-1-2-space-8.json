@@ -1,0 +1,158 @@
+{
+  "key": "s-final-1-2-space-8",
+  "input": {
+    "phoneme": "S",
+    "position": "final",
+    "syllables": "1-2",
+    "theme": "space",
+    "age": 8,
+    "count": 8,
+    "singleton": false
+  },
+  "items": [
+    {
+      "word": "stars",
+      "sentence": "The bright stars shine in the dark sky.",
+      "kid_definition": "Tiny lights that twinkle way up in space.",
+      "verdict": {
+        "status": "fail",
+        "word": "stars",
+        "phones": [
+          "S",
+          "T",
+          "AA",
+          "R",
+          "Z"
+        ],
+        "reason": "S T AA R Z: ends with Z, not S"
+      }
+    },
+    {
+      "word": "space",
+      "sentence": "Astronauts explore space in their rocket ship.",
+      "kid_definition": "The huge area above Earth where planets live.",
+      "verdict": {
+        "status": "pass",
+        "word": "space",
+        "phones": [
+          "S",
+          "P",
+          "EY",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/space.mp3"
+    },
+    {
+      "word": "glass",
+      "sentence": "The telescope is made of special glass.",
+      "kid_definition": "A clear material you can see through.",
+      "verdict": {
+        "status": "pass",
+        "word": "glass",
+        "phones": [
+          "G",
+          "L",
+          "AE",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/glass.mp3"
+    },
+    {
+      "word": "pass",
+      "sentence": "The spaceship will pass by the moon.",
+      "kid_definition": "To go by or move past something.",
+      "verdict": {
+        "status": "pass",
+        "word": "pass",
+        "phones": [
+          "P",
+          "AE",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/pass.mp3"
+    },
+    {
+      "word": "class",
+      "sentence": "Our class learned about the solar system.",
+      "kid_definition": "A group of students who learn together.",
+      "verdict": {
+        "status": "pass",
+        "word": "class",
+        "phones": [
+          "K",
+          "L",
+          "AE",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/class.mp3"
+    },
+    {
+      "word": "gas",
+      "sentence": "The sun is made of hot burning gas.",
+      "kid_definition": "Something that floats in the air like smoke.",
+      "verdict": {
+        "status": "pass",
+        "word": "gas",
+        "phones": [
+          "G",
+          "AE",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/gas.mp3"
+    },
+    {
+      "word": "mass",
+      "sentence": "The planet Jupiter has a huge mass.",
+      "kid_definition": "How heavy and big something is.",
+      "verdict": {
+        "status": "pass",
+        "word": "mass",
+        "phones": [
+          "M",
+          "AE",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/mass.mp3"
+    },
+    {
+      "word": "bus",
+      "sentence": "We rode the bus to the planetarium.",
+      "kid_definition": "A big vehicle that carries lots of people.",
+      "verdict": {
+        "status": "pass",
+        "word": "bus",
+        "phones": [
+          "B",
+          "AH",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/bus.mp3"
+    },
+    {
+      "word": "loss",
+      "sentence": "Losing your way in space would be a loss.",
+      "kid_definition": "When you no longer have something you had.",
+      "verdict": {
+        "status": "pass",
+        "word": "loss",
+        "phones": [
+          "L",
+          "AO",
+          "S"
+        ]
+      },
+      "audio": "/seeds/s-final-1-2-space-8/loss.mp3"
+    }
+  ],
+  "proposed": 16,
+  "source": "seed",
+  "model": "claude-haiku-4-5-20251001",
+  "generatedAt": "2026-09-26T16:40:56.303Z"
+}
