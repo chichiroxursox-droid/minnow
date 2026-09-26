@@ -31,3 +31,10 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: nothing yet
 - Next step: scaffold Next.js 15, git init, gh repo, first prod deploy
 - Scope cuts applied so far: none
+
+### Sat 12:26pm, Hour 1 milestone
+- Milestone: hit, MISSED by 86 minutes against the 11:00am clock (build started 11:57am)
+- Done-when result: https://minnow-chiethan.vercel.app returns 200 with a hello world page; public repo at https://github.com/chichiroxursox-droid/minnow; four env vars set on Vercel production
+- What broke: the chiethan team has Vercel Authentication on by default, so every URL redirected to SSO. Disabled ssoProtection for this project through the Vercel API. Note: minnow.vercel.app belongs to someone else, the prod alias is minnow-chiethan.vercel.app (also minnow-eta.vercel.app)
+- Next step: lib/verify.ts and lib/verify.test.ts green under node --test
+- Scope cuts applied so far: none (shadcn/ui skipped in favor of plain Tailwind, not a feature cut)
