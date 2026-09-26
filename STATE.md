@@ -38,3 +38,10 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: the chiethan team has Vercel Authentication on by default, so every URL redirected to SSO. Disabled ssoProtection for this project through the Vercel API. Note: minnow.vercel.app belongs to someone else, the prod alias is minnow-chiethan.vercel.app (also minnow-eta.vercel.app)
 - Next step: lib/verify.ts and lib/verify.test.ts green under node --test
 - Scope cuts applied so far: none (shadcn/ui skipped in favor of plain Tailwind, not a feature cut)
+
+### Sat 12:36pm, Hour 3 milestone
+- Milestone: hit, 24 minutes early against the 1:00pm clock
+- Done-when result: `npm test` runs `node --test lib/verify.test.ts`, 7 tests green: stress stripping, initial/medial/final position, syllable count, singleton clusters, missing word returns unverified, input normalization. Committed, pushed, redeployed to prod
+- What broke: nothing. Node 24 runs the .ts test directly; tsconfig needed allowImportingTsExtensions so next build type-checks the test import
+- Next step: lib/propose.ts with generateObject + 8s timeout, /api/propose route, scripts/make-seeds.mjs, first seed JSON for K initial ocean age 6
+- Scope cuts applied so far: none
