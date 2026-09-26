@@ -97,3 +97,10 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: nothing
 - Next step: submit before Sun 9:15am EDT and screenshot the confirmation
 - Scope cuts applied so far: none
+
+### Sat 2:50pm, post-freeze bug fix (v1.1)
+- Milestone: bug fix after v1, allowed under the freeze rule. Ethan found that /k/ initial with 3 syllables returned 16 proposed, 15 rejected, 1 kept. The model cannot count syllables
+- Done-when result: when fewer than count words survive, lib/propose.ts sends the rejects with the dictionary's reasons back to the model once and asks for replacements (two rounds max, 8s per round, route maxDuration 30). Measured on prod: /k/ initial 3 syllables 7 kept in 8.1s over 2 rounds (was 1 kept); /k/ initial 1-2 unchanged at 8 kept, 1 round, 5.7s. Locally /s/ final 3 went from 0 to 4 kept; /r/ medial 3 stays at about 1 kept, the model keeps offering vocalic ER and two-syllable words. Tests 7 pass, build clean, demo walk clean on prod after deploy. Tagged v1.1
+- What broke: two earlier attempts did not move the number: (1) three-syllable examples in the prompt plus 3x candidates timed out at 12s with 0 to 3 kept; (2) a syllable_split field the model had to fill first gave 3 to 4 kept and added 1.5s to the 1-2 path, so it was dropped. Prompt wording is not the lever; the dictionary's verdicts are
+- Next step: nothing on code. Ethan submits (see NEEDED FROM ETHAN). If demoing 3 syllables, use /k/ initial, not /r/ medial
+- Scope cuts applied so far: none
