@@ -104,3 +104,10 @@ Rule: if a milestone is 90 minutes late, apply the next item in the scope cut or
 - What broke: two earlier attempts did not move the number: (1) three-syllable examples in the prompt plus 3x candidates timed out at 12s with 0 to 3 kept; (2) a syllable_split field the model had to fill first gave 3 to 4 kept and added 1.5s to the 1-2 path, so it was dropped. Prompt wording is not the lever; the dictionary's verdicts are
 - Next step: nothing on code. Ethan submits (see NEEDED FROM ETHAN). If demoing 3 syllables, use /k/ initial, not /r/ medial
 - Scope cuts applied so far: none
+
+### Sat 3:05pm, v1.2 feature pass (Ethan asked for engagement features)
+- Milestone: minimal pairs, voice speed, homework print, Your turn, and cached pictures shipped and deployed. Tagged v1.2. Freeze still Sun 8:00am
+- Done-when result: 11 tests pass (`node --test "lib/*.test.ts"`), build clean, offline walk with all keys blanked passes (pairs, pictures, Your turn via fake mic all work from the cache), prod walk passes, ~/Desktop/minnow-demo.mp4 re-recorded from prod (H.264, 43.8s, frames checked: reject list, pictures, Play yours, Slow). Print view checked by screenshot. Seeds now carry pair audio (kite/tight, coast/toast, crew/true, pass/pat, mass/mat, bus/but) and two pictures (crab, coral). ElevenLabs usage 104 of 10,000. kie credits 166 after three image jobs (about 8 each; kite timed out on kie's side and was still charged)
+- What broke: (1) raw cmudict paired "coral" with the surname "tearle", so pairs are limited to lib/common-words.json (2,941 words: two Haiku drafts filtered against cmudict plus a built-in core list). (2) Structured output for the word list hit the token limit and lost everything; switched to plain text, one word per line. (3) Homebrew ffmpeg has no webp encoder; pictures are 512px jpg. (4) make-seeds.ts targets needed the new contrast field to type-check
+- Next step: Ethan decides on the picture batch (about 20 more images fit the remaining credits). Then run scripts/make-images.sh, scripts/make-seeds.ts, redeploy, re-record
+- Scope cuts applied so far: none
