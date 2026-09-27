@@ -20,9 +20,12 @@ Next.js 15 App Router, TypeScript, Tailwind v4, `ai` + `@ai-sdk/anthropic` (gene
 - `scripts/make-common-words.ts` drafts the common-word list with one Haiku call, merges, filters against cmudict; `--no-model` merges the built-in core list only
 - `scripts/make-images.sh` one flat illustration per cached word via the local nano-banana-kie CLI (kie.ai, about 8 credits each), 512px jpg into public/seeds
 - `lib/seeds.ts` imports the cached seed JSON so the fallback works with every API key removed
-- `public/seeds/<key>.json` and `public/seeds/<key>/<word>.mp3` cached output for three targets
-- `scripts/make-seeds.ts` generates seed JSON and MP3s once, skips any MP3 that already exists: `node --env-file=.env.local scripts/make-seeds.ts [key]`
-- `scripts/demo-video.cjs` headless Playwright walk and recording of the demo path: `NODE_PATH=$(npm root -g) node scripts/demo-video.cjs [url] [outdir]`
+- `public/seeds/<key>.json` and `public/seeds/<key>/<word>.mp3` cached output for six targets; the /k/ ocean one is the first-paint starter set
+- `lib/sets.ts` seedKey and arrange, pure and shared by server and page (keeps the AI SDK out of the client bundle)
+- `scripts/make-seeds.ts` generates seed JSON and MP3s once, skips any MP3 that already exists, re-verifies cached JSON: `node --env-file=.env.local scripts/make-seeds.ts [key]`
+- `scripts/demo-video.cjs` headless Playwright walk and recording of the demo path, writes beats.json: `NODE_PATH=$(npm root -g) node scripts/demo-video.cjs [url] [outdir]`
+- `scripts/narrate.ts` ElevenLabs narration over the walk video, clips cached by text hash in ~/Desktop/minnow-narration: `node --env-file=.env.local scripts/narrate.ts [outdir] [out.mp4]`
+- The ElevenLabs key is shared with another project (about 1,900 characters of its narration landed Sat 2:25pm). Check usage before any live TTS work
 
 ## The one AI mechanism
 Input: `{ phoneme: ARPAbet, position: initial|medial|final, syllables: '1-2'|'3', theme, age, count }`. Ask the model for 2x count. Output schema: `{ items: [{ word, sentence, kid_definition }] }`. Then `verify()` runs on every word. If fewer than count pass, send the rejects with the dictionary's reasons back once for replacements (two rounds max, 8s timeout per round). A reject's reason is the dictionary's actual phonemes. A word missing from the dictionary is "unverified", never a verdict.
