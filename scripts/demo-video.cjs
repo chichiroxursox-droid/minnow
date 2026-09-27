@@ -19,7 +19,7 @@ const size = device.viewport;
   const page = await ctx.newPage();
   const t0 = Date.now();
   const beats = [];
-  const beat = (name) => beats.push({ name, t: (Date.now() - t0) / 1000 });
+  const beat = (name, extra = {}) => beats.push({ name, t: (Date.now() - t0) / 1000, ...extra });
   const shot = (name) => page.screenshot({ path: `${out}/${name}.png` });
   const pause = (ms) => page.waitForTimeout(ms);
   const check = page.getByPlaceholder("type any word");
@@ -60,11 +60,13 @@ const size = device.viewport;
   await shot("04-ocean");
   await typeCheck("coral");
   await shot("05-coral");
+  await pause(2000); // let the check narration finish before Play
 
   // Play a verified word, then the child's turn, then hear it back.
   const play = page.getByRole("button", { name: /^Play / }).first();
   await play.scrollIntoViewIfNeeded();
-  beat("play");
+  // The recording has no page audio, so note the word; narrate.ts mixes its cached MP3 back in.
+  beat("play", { word: (await play.getAttribute("aria-label")).replace(/^Play /, "") });
   await play.click();
   await pause(700);
   await shot("06-playing");
@@ -91,7 +93,8 @@ const size = device.viewport;
   await buildLive();
   await pause(800);
   await page.locator('[data-testid="rejects"], [data-testid="passes"]').first().scrollIntoViewIfNeeded();
-  await pause(6000);
+  beat("rejects");
+  await pause(9000);
   await shot("07-r-medial");
   beat("end");
 

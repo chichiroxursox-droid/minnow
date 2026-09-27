@@ -454,16 +454,17 @@ export default function Home() {
                     </div>
                   </div>
                   {it.pair && (
-                    <p className="mt-3 flex flex-wrap items-center gap-x-2 rounded-lg bg-teal-mist/50 px-3 py-1.5 text-sm text-teal-deep">
-                      <span>Minimal pair with {contrastLabel}:</span>
-                      <span className="font-display text-base font-semibold">{it.pair.word}</span>
-                      <span className="font-mono text-[11px] tracking-wide">{it.pair.phones.join(" ")}</span>
-                      <span className="text-xs">/{it.pair.ipa}/</span>
+                    <p className="mt-3 flex items-center gap-2 rounded-lg bg-teal-mist/50 px-3 py-1.5 text-sm text-teal-deep">
+                      <span className="min-w-0 flex-1">
+                        Minimal pair with {contrastLabel}: <span className="font-display text-base font-semibold">{it.pair.word}</span>{" "}
+                        <span className="whitespace-nowrap font-mono text-[11px] tracking-wide">{it.pair.phones.join(" ")}</span>{" "}
+                        <span className="whitespace-nowrap text-xs">/{it.pair.ipa}/</span>
+                      </span>
                       <button
                         type="button"
                         onClick={() => play(it.pair!.word, it.pair!.audio)}
                         disabled={playing === it.pair.word}
-                        className="ml-auto inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium text-teal-deep transition-colors duration-150 hover:bg-teal/10 disabled:opacity-60 outline-none focus-visible:ring-2 focus-visible:ring-teal/40 print:hidden"
+                        className="inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium text-teal-deep transition-colors duration-150 hover:bg-teal/10 disabled:opacity-60 outline-none focus-visible:ring-2 focus-visible:ring-teal/40 print:hidden"
                         aria-label={`Play ${it.pair.word}`}
                       >
                         <PlayIcon />

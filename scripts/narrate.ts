@@ -4,6 +4,7 @@
 // so re-running never spends voice characters. Lines never overlap: a line that would start before the
 // previous one ends is pushed back, and the video is padded on its last frame if narration runs long.
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
@@ -21,8 +22,9 @@ const LINES: Record<string, string> = {
     "Coral passes, and the evidence is the dictionary's own phonemes.",
   play: "Every verified word is voiced by ElevenLabs. The child records their turn and hears both back. Nothing is uploaded.",
   slow: "Slow the voice down for younger kids.",
-  rmedial:
-    "Switch to medial r on a farm theme, and the dictionary strikes out the model's mistakes first, each with the reason. " +
+  rmedial: "Now switch to r in the middle of a word, on a farm theme.",
+  rejects:
+    "The dictionary strikes out the model's mistakes first, each with the reason. " +
     "That is Minnow. The model proposes, the dictionary decides.",
 };
 
@@ -30,7 +32,16 @@ const [walkDir, outFile] = process.argv.slice(2);
 if (!walkDir || !outFile) throw new Error("usage: narrate.ts <walkdir> <out.mp4>");
 const webm = readdirSync(walkDir).find((f) => f.endsWith(".webm"));
 if (!webm) throw new Error("no .webm in " + walkDir);
-const beats: { name: string; t: number }[] = JSON.parse(readFileSync(join(walkDir, "beats.json"), "utf8"));
+const beats: { name: string; t: number; word?: string }[] = JSON.parse(readFileSync(join(walkDir, "beats.json"), "utf8"));
+
+/** A practice word's cached MP3 from any seed folder, so the viewer hears the product voice. */
+function cachedWord(word: string): string | null {
+  for (const d of readdirSync("public/seeds", { withFileTypes: true })) {
+    const f = join("public/seeds", d.name, `${word}.mp3`);
+    if (d.isDirectory() && existsSync(f)) return f;
+  }
+  return null;
+}
 const dir = join(homedir(), "Desktop", "minnow-narration");
 mkdirSync(dir, { recursive: true });
 
@@ -41,9 +52,20 @@ let checked = false;
 const cues: { file: string; at: number }[] = [];
 let prevEnd = 0;
 for (const b of beats) {
+  const word = b.word ? cachedWord(b.word) : null;
+  if (word) {
+    // The word plays first, at the moment Play is clicked, and the narration waits for it.
+    const at = Math.max(b.t + 0.2, prevEnd + 0.3);
+    cues.push({ file: word, at });
+    prevEnd = at + duration(word);
+    console.log(`  ${b.name}: mixed cached "${b.word}" at ${at.toFixed(1)}s`);
+  } else if (b.word) {
+    console.log(`  ${b.name}: no cached MP3 for "${b.word}", skipped`);
+  }
   const line = LINES[b.name];
   if (!line) continue;
-  const file = join(dir, `${b.name}.mp3`);
+  // Keyed by the line's text, so editing a line makes a new clip and an unchanged line is never re-synthesized.
+  const file = join(dir, `${b.name}-${createHash("sha1").update(line).digest("hex").slice(0, 8)}.mp3`);
   if (!existsSync(file)) {
     if (!checked) {
       await assertUnderCeiling();
