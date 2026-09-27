@@ -9,7 +9,9 @@ Read `STATE.md` first. Do not re-explore the repo. If anything at the top of STA
 Next.js 15 App Router, TypeScript, Tailwind v4, `ai` + `@ai-sdk/anthropic` (generateObject), zod v3, `cmu-pronouncing-dictionary`, ElevenLabs REST (`eleven_flash_v2_5`), Vercel production. No database, no auth, no new dependencies.
 
 ## Layout
-- `app/page.tsx` form, preset chips, card list with rejects rendered first, check-a-word box, Play buttons
+- `app/page.tsx` mode switch (Therapist or Family, kept in the URL as mode=family), therapist form, preset chips, card list with rejects rendered first, check-a-word box, Play buttons
+- `app/family.tsx` family mode: twelve sound buttons, start/middle/end, theme, one picture flashcard at a time. Verified words only
+- `app/ui.tsx` shared Mark, icons, segmented control, button styles
 - `app/api/propose/route.ts` Haiku structured output (`generateText` + `Output.object`, the current form of generateObject in ai v7) with 8s timeout, verifies every word, falls back to the cached seed for that key
 - `app/api/verify/route.ts` dictionary-only check for the check-a-word box, works with no keys
 - `app/api/speak/route.ts` ElevenLabs text to speech, returns audio/mpeg, refuses when usage passes the credit ceiling

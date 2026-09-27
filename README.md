@@ -70,7 +70,7 @@ Each verified card has a "Your turn" button. It records 2.5 seconds from the mic
 
 ## Pictures
 
-Each cached word has a flat illustration made once with Nano Banana 2 through kie.ai (`scripts/make-images.sh`), stored at 512px under `public/seeds/<key>/<word>.jpg`. Live words that match a cached word reuse the picture. Other live words have no picture rather than a wrong one.
+22 cached words have a flat illustration made once with Nano Banana 2 through kie.ai (`scripts/make-images.sh`), stored at 512px under `public/seeds/<key>/<word>.jpg`. They cover the /k/ ocean and /l/ zoo sets and half of /r/ farm. Live words that match a cached word reuse the picture. Other words show a large first letter rather than a wrong picture. Pictures are not generated live: each one took 18 to 73 seconds and about 8 kie credits, so a single live set would cost around 64 credits and several minutes.
 
 ## Run it locally
 
