@@ -23,9 +23,9 @@ const LINES: Record<string, string> = {
   play: "Every verified word is voiced by ElevenLabs. The child records their turn and hears both back. Nothing is uploaded.",
   slow: "Slow the voice down for younger kids.",
   rmedial: "Now switch to r in the middle of a word, on a farm theme.",
-  rejects:
-    "The dictionary strikes out the model's mistakes first, each with the reason. " +
-    "That is Minnow. The model proposes, the dictionary decides.",
+  rejects: "The dictionary strikes out the model's mistakes first, each with the reason.",
+  family: "For parents and kids, there is a simpler family mode. Pick a sound, see the picture, hear the word, and say it back.",
+  outro: "The model proposes, the dictionary decides. That is Minnow.",
 };
 
 const [walkDir, outFile] = process.argv.slice(2);

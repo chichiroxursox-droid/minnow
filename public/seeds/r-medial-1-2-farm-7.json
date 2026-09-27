@@ -75,7 +75,8 @@
         ],
         "ipa": "bɑrn"
       },
-      "audio": "/seeds/r-medial-1-2-farm-7/barn.mp3"
+      "audio": "/seeds/r-medial-1-2-farm-7/barn.mp3",
+      "image": "/seeds/r-medial-1-2-farm-7/barn.jpg"
     },
     {
       "word": "corn",
@@ -92,7 +93,8 @@
         ],
         "ipa": "kɔrn"
       },
-      "audio": "/seeds/r-medial-1-2-farm-7/corn.mp3"
+      "audio": "/seeds/r-medial-1-2-farm-7/corn.mp3",
+      "image": "/seeds/r-medial-1-2-farm-7/corn.jpg"
     },
     {
       "word": "horse",
@@ -109,7 +111,8 @@
         ],
         "ipa": "hɔrs"
       },
-      "audio": "/seeds/r-medial-1-2-farm-7/horse.mp3"
+      "audio": "/seeds/r-medial-1-2-farm-7/horse.mp3",
+      "image": "/seeds/r-medial-1-2-farm-7/horse.jpg"
     },
     {
       "word": "porch",
@@ -163,7 +166,8 @@
         ],
         "ipa": "ɔrəndʒ"
       },
-      "audio": "/seeds/r-medial-1-2-farm-7/orange.mp3"
+      "audio": "/seeds/r-medial-1-2-farm-7/orange.mp3",
+      "image": "/seeds/r-medial-1-2-farm-7/orange.jpg"
     },
     {
       "word": "morning",

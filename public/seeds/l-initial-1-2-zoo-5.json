@@ -26,7 +26,8 @@
         ],
         "ipa": "laɪən"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/lion.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/lion.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/lion.jpg"
     },
     {
       "word": "llama",
@@ -43,7 +44,8 @@
         ],
         "ipa": "lɑmə"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/llama.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/llama.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/llama.jpg"
     },
     {
       "word": "leopard",
@@ -61,7 +63,8 @@
         ],
         "ipa": "lɛpɚd"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/leopard.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/leopard.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/leopard.jpg"
     },
     {
       "word": "lemur",
@@ -78,7 +81,8 @@
         ],
         "ipa": "limɚ"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/lemur.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/lemur.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/lemur.jpg"
     },
     {
       "word": "lizard",
@@ -96,7 +100,8 @@
         ],
         "ipa": "lɪzɚd"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/lizard.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/lizard.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/lizard.jpg"
     },
     {
       "word": "lobster",
@@ -115,7 +120,8 @@
         ],
         "ipa": "lɑbstɚ"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/lobster.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/lobster.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/lobster.jpg"
     },
     {
       "word": "lynx",
@@ -133,7 +139,8 @@
         ],
         "ipa": "lɪŋks"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/lynx.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/lynx.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/lynx.jpg"
     },
     {
       "word": "loon",
@@ -149,7 +156,8 @@
         ],
         "ipa": "lun"
       },
-      "audio": "/seeds/l-initial-1-2-zoo-5/loon.mp3"
+      "audio": "/seeds/l-initial-1-2-zoo-5/loon.mp3",
+      "image": "/seeds/l-initial-1-2-zoo-5/loon.jpg"
     }
   ],
   "proposed": 16,

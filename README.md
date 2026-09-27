@@ -9,7 +9,9 @@ Claude proposes candidate words for a target sound. The CMU Pronouncing Dictiona
 
 ## What it does
 
-An SLP picks a target sound (for example /k/), a word position (initial, medial, final), a syllable range, a theme, and a child's age, then clicks Build set.
+Minnow has two modes, switched at the top of the page. **Therapist** mode is the full tool described below. **Family** mode keeps just the essentials for a parent and child: pick a sound from twelve big buttons ("k as in kite"), choose start, middle, or end, say what the child loves, and get one picture card at a time with Hear it, Your turn, and Next. Family mode only ever shows dictionary-verified words and hides the phonemes, rejects, pairs, and settings. Add `mode=family` to a link to open it directly.
+
+In therapist mode, an SLP picks a target sound (for example /k/), a word position (initial, medial, final), a syllable range, a theme, and a child's age, then clicks Build set.
 
 1. Claude Haiku 4.5 is asked for twice as many words as needed, each with a short practice sentence and a kid definition.
 2. Every proposed word is looked up in the CMU Pronouncing Dictionary and checked against the target. Rejects are listed first with the reason. Verified words are shown as practice cards, capped at the requested count. A short list is never padded.

@@ -25,7 +25,8 @@
         ],
         "ipa": "kɛlp"
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/kelp.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/kelp.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/kelp.jpg"
     },
     {
       "word": "crab",
@@ -79,7 +80,8 @@
         ],
         "ipa": "kaɪæk"
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/kayak.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/kayak.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/kayak.jpg"
     },
     {
       "word": "current",
@@ -97,7 +99,8 @@
         ],
         "ipa": "kɝənt"
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/current.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/current.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/current.jpg"
     },
     {
       "word": "cove",
@@ -113,7 +116,8 @@
         ],
         "ipa": "koʊv"
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/cove.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/cove.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/cove.jpg"
     },
     {
       "word": "cabin",
@@ -131,7 +135,8 @@
         ],
         "ipa": "kæbən"
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/cabin.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/cabin.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/cabin.jpg"
     },
     {
       "word": "kite",
@@ -157,7 +162,8 @@
         ],
         "ipa": "taɪt",
         "audio": "/seeds/k-initial-1-2-ocean-6/tight.mp3"
-      }
+      },
+      "image": "/seeds/k-initial-1-2-ocean-6/kite.jpg"
     },
     {
       "word": "coast",
@@ -185,7 +191,8 @@
         ],
         "ipa": "toʊst",
         "audio": "/seeds/k-initial-1-2-ocean-6/toast.mp3"
-      }
+      },
+      "image": "/seeds/k-initial-1-2-ocean-6/coast.jpg"
     },
     {
       "word": "cork",
@@ -218,7 +225,8 @@
         ],
         "ipa": "kɑm"
       },
-      "audio": "/seeds/k-initial-1-2-ocean-6/calm.mp3"
+      "audio": "/seeds/k-initial-1-2-ocean-6/calm.mp3",
+      "image": "/seeds/k-initial-1-2-ocean-6/calm.jpg"
     },
     {
       "word": "crew",

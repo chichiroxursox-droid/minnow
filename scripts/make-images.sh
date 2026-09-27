@@ -35,6 +35,14 @@ r-medial-1-2-farm-7|garden|a vegetable garden with neat rows of plants
 r-medial-1-2-farm-7|orange|a bright orange fruit with a leaf
 r-medial-1-2-farm-7|morning|a sunrise over a farm with a rooster crowing
 r-medial-1-2-farm-7|narrow|a narrow dirt path between two wooden fences
+l-initial-1-2-zoo-5|lion|a friendly lion with a big golden mane
+l-initial-1-2-zoo-5|llama|a fluffy white llama standing in grass
+l-initial-1-2-zoo-5|leopard|a spotted leopard resting on a tree branch
+l-initial-1-2-zoo-5|lemur|a ring-tailed lemur with a long striped tail
+l-initial-1-2-zoo-5|lizard|a green lizard sitting on a rock
+l-initial-1-2-zoo-5|lobster|a red lobster with big claws
+l-initial-1-2-zoo-5|lynx|a lynx cat with tufted ears
+l-initial-1-2-zoo-5|loon|a black and white loon bird swimming on a lake
 s-final-1-2-space-8|space|outer space with planets, stars, and a rocket
 s-final-1-2-space-8|glass|a clear glass of water
 s-final-1-2-space-8|pass|a child passing a ball to a friend

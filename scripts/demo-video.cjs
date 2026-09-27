@@ -85,17 +85,38 @@ const size = device.viewport;
   await pause(2500);
   await shot("06d-slow");
 
-  // Switch to the /r/ medial preset and build again.
+  // Switch to the /r/ medial seed: the cached set shows at once, rejects first.
   await page.getByRole("button", { name: /\/r\/ medial/ }).scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: /\/r\/ medial/ }).click();
-  await pause(800);
   beat("rmedial");
-  await buildLive();
-  await pause(800);
-  await page.locator('[data-testid="rejects"], [data-testid="passes"]').first().scrollIntoViewIfNeeded();
+  await page.getByRole("button", { name: /\/r\/ medial/ }).click();
+  await page.waitForSelector('[data-testid="rejects"]');
+  await pause(1500);
+  await page.locator('[data-testid="rejects"]').scrollIntoViewIfNeeded();
   beat("rejects");
-  await pause(9000);
+  await pause(7000);
   await shot("07-r-medial");
+
+  // Family mode: the essentials, one picture card at a time.
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
+  await pause(700);
+  beat("family");
+  await page.getByRole("button", { name: "Family", exact: true }).click();
+  await pause(2200);
+  await shot("08-family");
+  await page.getByRole("button", { name: /^l start/ }).click();
+  await page.waitForSelector('[data-testid="flashcards"]');
+  await page.locator('[data-testid="flashcards"]').scrollIntoViewIfNeeded();
+  await pause(4500);
+  const hear = page.getByRole("button", { name: /^Play / }).first();
+  beat("hear", { word: (await hear.getAttribute("aria-label")).replace(/^Play /, "") });
+  await hear.click();
+  await pause(1800);
+  await shot("09-flashcard");
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await pause(900);
+  beat("outro");
+  await pause(4800);
+  await shot("10-next");
   beat("end");
 
   const video = page.video();
