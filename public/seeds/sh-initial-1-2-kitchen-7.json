@@ -1,0 +1,194 @@
+{
+  "key": "sh-initial-1-2-kitchen-7",
+  "input": {
+    "phoneme": "SH",
+    "position": "initial",
+    "syllables": "1-2",
+    "theme": "kitchen",
+    "age": 7,
+    "count": 8,
+    "singleton": false,
+    "contrast": "S"
+  },
+  "items": [
+    {
+      "word": "shelf",
+      "sentence": "The shelf holds dishes in the kitchen.",
+      "kid_definition": "A flat board on a wall where you put things.",
+      "verdict": {
+        "status": "pass",
+        "word": "shelf",
+        "phones": [
+          "SH",
+          "EH",
+          "L",
+          "F"
+        ],
+        "ipa": "ʃɛlf"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/shelf.mp3",
+      "pair": {
+        "word": "self",
+        "phones": [
+          "S",
+          "EH",
+          "L",
+          "F"
+        ],
+        "ipa": "sɛlf",
+        "audio": "/seeds/sh-initial-1-2-kitchen-7/self.mp3"
+      }
+    },
+    {
+      "word": "sharp",
+      "sentence": "The sharp knife cuts vegetables well.",
+      "kid_definition": "Something pointy that can cut you.",
+      "verdict": {
+        "status": "pass",
+        "word": "sharp",
+        "phones": [
+          "SH",
+          "AA",
+          "R",
+          "P"
+        ],
+        "ipa": "ʃɑrp"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/sharp.mp3"
+    },
+    {
+      "word": "shiny",
+      "sentence": "The shiny pot reflects light brightly.",
+      "kid_definition": "Something that looks very bright and sparkly.",
+      "verdict": {
+        "status": "pass",
+        "word": "shiny",
+        "phones": [
+          "SH",
+          "AY",
+          "N",
+          "IY"
+        ],
+        "ipa": "ʃaɪni"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/shiny.mp3"
+    },
+    {
+      "word": "shake",
+      "sentence": "Shake the salt container over your food.",
+      "kid_definition": "To move something back and forth quickly.",
+      "verdict": {
+        "status": "pass",
+        "word": "shake",
+        "phones": [
+          "SH",
+          "EY",
+          "K"
+        ],
+        "ipa": "ʃeɪk"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/shake.mp3",
+      "pair": {
+        "word": "sake",
+        "phones": [
+          "S",
+          "EY",
+          "K"
+        ],
+        "ipa": "seɪk",
+        "audio": "/seeds/sh-initial-1-2-kitchen-7/sake.mp3"
+      }
+    },
+    {
+      "word": "shape",
+      "sentence": "Cookie cutters make different shapes of dough.",
+      "kid_definition": "The outline or form of something.",
+      "verdict": {
+        "status": "pass",
+        "word": "shape",
+        "phones": [
+          "SH",
+          "EY",
+          "P"
+        ],
+        "ipa": "ʃeɪp"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/shape.mp3"
+    },
+    {
+      "word": "share",
+      "sentence": "Share the cookies with your sister please.",
+      "kid_definition": "To give some of what you have to someone else.",
+      "verdict": {
+        "status": "pass",
+        "word": "share",
+        "phones": [
+          "SH",
+          "EH",
+          "R"
+        ],
+        "ipa": "ʃɛr"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/share.mp3"
+    },
+    {
+      "word": "shell",
+      "sentence": "The egg shell breaks when you cook breakfast.",
+      "kid_definition": "A hard outer covering of eggs or nuts.",
+      "verdict": {
+        "status": "pass",
+        "word": "shell",
+        "phones": [
+          "SH",
+          "EH",
+          "L"
+        ],
+        "ipa": "ʃɛl"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/shell.mp3",
+      "pair": {
+        "word": "sell",
+        "phones": [
+          "S",
+          "EH",
+          "L"
+        ],
+        "ipa": "sɛl",
+        "audio": "/seeds/sh-initial-1-2-kitchen-7/sell.mp3"
+      }
+    },
+    {
+      "word": "shift",
+      "sentence": "Shift the pans to make more space.",
+      "kid_definition": "To move something from one place to another.",
+      "verdict": {
+        "status": "pass",
+        "word": "shift",
+        "phones": [
+          "SH",
+          "IH",
+          "F",
+          "T"
+        ],
+        "ipa": "ʃɪft"
+      },
+      "audio": "/seeds/sh-initial-1-2-kitchen-7/shift.mp3",
+      "pair": {
+        "word": "sift",
+        "phones": [
+          "S",
+          "IH",
+          "F",
+          "T"
+        ],
+        "ipa": "sɪft",
+        "audio": "/seeds/sh-initial-1-2-kitchen-7/sift.mp3"
+      }
+    }
+  ],
+  "proposed": 16,
+  "rounds": 1,
+  "source": "seed",
+  "model": "claude-haiku-4-5-20251001",
+  "generatedAt": "2026-09-26T23:14:13.910Z"
+}

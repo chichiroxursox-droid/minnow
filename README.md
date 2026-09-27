@@ -19,7 +19,7 @@ An SLP picks a target sound (for example /k/), a word position (initial, medial,
 6. Cached words have a picture. "Print homework" turns the verified cards into a sheet with a tally row.
 7. A check-a-word box lets the clinician type any word and get the dictionary's verdict, and its pair, instantly. No AI involved.
 
-Three practice sets are cached in the repo, so the app still works with every API key removed.
+Six practice sets are cached in the repo, so the app still works with every API key removed. The cached /k/ ocean set is on screen the moment the page loads; Build set replaces it with a fresh live one. Every phoneme string is shown in both the dictionary's ARPAbet and broad IPA (`K AO R AH L /kɔrəl/`), and the whole target lives in the URL, so a link like `?sound=SH&position=initial&theme=kitchen&age=7` opens straight to that set.
 
 ## How the dictionary check works
 
@@ -42,7 +42,7 @@ A reject's reason is built from the dictionary's phones, never from the model. E
 | octopus | /k/ medial, 1 to 2 syllables | `AA K T AH P UH S: 3 syllables, wanted 1-2` |
 | coral | /k/ initial | verified, `K AO R AH L` |
 
-Tests live in `lib/verify.test.ts` and run with the Node test runner: `npm test`. They cover stress stripping, all three positions, syllable counting, the singleton option, and the missing-word case.
+Tests live in `lib/verify.test.ts` and run with the Node test runner: `npm test`. They cover stress stripping, all three positions, syllable counting, the singleton option, the missing-word case, and the ARPAbet to IPA conversion (unstressed `AH0` becomes schwa).
 
 ## Minimal pairs
 
@@ -88,7 +88,8 @@ ELEVENLABS_VOICE_ID=...
 
 - `npm test` runs the verifier tests.
 - `node --env-file=.env.local scripts/make-seeds.ts` regenerates seed JSON and MP3s, reusing anything that already exists.
-- `NODE_PATH=$(npm root -g) node scripts/demo-video.cjs [url] [outdir]` walks the demo path headlessly with the globally installed Playwright and records a video.
+- `NODE_PATH=$(npm root -g) node scripts/demo-video.cjs [url] [outdir]` walks the demo path headlessly with the globally installed Playwright, records a video, and writes the time of each demo beat.
+- `node --env-file=.env.local scripts/narrate.ts [outdir] [out.mp4]` voices one narration line per beat with ElevenLabs (each line is synthesized once and cached) and mixes it over the recording.
 
 Stack: Next.js 15 App Router, TypeScript, Tailwind v4, AI SDK 7 with `@ai-sdk/anthropic`, zod 3, `cmu-pronouncing-dictionary`, ElevenLabs REST, Vercel.
 

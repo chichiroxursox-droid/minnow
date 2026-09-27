@@ -1,0 +1,160 @@
+{
+  "key": "l-initial-1-2-zoo-5",
+  "input": {
+    "phoneme": "L",
+    "position": "initial",
+    "syllables": "1-2",
+    "theme": "zoo",
+    "age": 5,
+    "count": 8,
+    "singleton": false,
+    "contrast": "W"
+  },
+  "items": [
+    {
+      "word": "lion",
+      "sentence": "The lion roared loudly at the zoo.",
+      "kid_definition": "A big furry cat with a fluffy mane.",
+      "verdict": {
+        "status": "pass",
+        "word": "lion",
+        "phones": [
+          "L",
+          "AY",
+          "AH",
+          "N"
+        ],
+        "ipa": "laɪən"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/lion.mp3"
+    },
+    {
+      "word": "llama",
+      "sentence": "We saw a llama eating hay.",
+      "kid_definition": "A fluffy animal that looks like a tall sheep.",
+      "verdict": {
+        "status": "pass",
+        "word": "llama",
+        "phones": [
+          "L",
+          "AA",
+          "M",
+          "AH"
+        ],
+        "ipa": "lɑmə"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/llama.mp3"
+    },
+    {
+      "word": "leopard",
+      "sentence": "The leopard had spotted fur.",
+      "kid_definition": "A big cat with black spots on its body.",
+      "verdict": {
+        "status": "pass",
+        "word": "leopard",
+        "phones": [
+          "L",
+          "EH",
+          "P",
+          "ER",
+          "D"
+        ],
+        "ipa": "lɛpɚd"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/leopard.mp3"
+    },
+    {
+      "word": "lemur",
+      "sentence": "The lemur jumped from tree to tree.",
+      "kid_definition": "A furry animal with a long striped tail.",
+      "verdict": {
+        "status": "pass",
+        "word": "lemur",
+        "phones": [
+          "L",
+          "IY",
+          "M",
+          "ER"
+        ],
+        "ipa": "limɚ"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/lemur.mp3"
+    },
+    {
+      "word": "lizard",
+      "sentence": "The lizard crawled across the hot rocks.",
+      "kid_definition": "A scaly animal with four legs and a long tail.",
+      "verdict": {
+        "status": "pass",
+        "word": "lizard",
+        "phones": [
+          "L",
+          "IH",
+          "Z",
+          "ER",
+          "D"
+        ],
+        "ipa": "lɪzɚd"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/lizard.mp3"
+    },
+    {
+      "word": "lobster",
+      "sentence": "We found a lobster in the tank.",
+      "kid_definition": "A sea creature with big claws and a hard shell.",
+      "verdict": {
+        "status": "pass",
+        "word": "lobster",
+        "phones": [
+          "L",
+          "AA",
+          "B",
+          "S",
+          "T",
+          "ER"
+        ],
+        "ipa": "lɑbstɚ"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/lobster.mp3"
+    },
+    {
+      "word": "lynx",
+      "sentence": "The lynx had pointy ears and whiskers.",
+      "kid_definition": "A wild cat with a short tail and tufted ears.",
+      "verdict": {
+        "status": "pass",
+        "word": "lynx",
+        "phones": [
+          "L",
+          "IH",
+          "NG",
+          "K",
+          "S"
+        ],
+        "ipa": "lɪŋks"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/lynx.mp3"
+    },
+    {
+      "word": "loon",
+      "sentence": "The loon swam in the water area.",
+      "kid_definition": "A black and white water bird that dives deep.",
+      "verdict": {
+        "status": "pass",
+        "word": "loon",
+        "phones": [
+          "L",
+          "UW",
+          "N"
+        ],
+        "ipa": "lun"
+      },
+      "audio": "/seeds/l-initial-1-2-zoo-5/loon.mp3"
+    }
+  ],
+  "proposed": 16,
+  "rounds": 1,
+  "source": "seed",
+  "model": "claude-haiku-4-5-20251001",
+  "generatedAt": "2026-09-26T23:14:01.611Z"
+}

@@ -1,5 +1,6 @@
 import { dictionary } from "cmu-pronouncing-dictionary";
 import { phonesFor, stripStress, type Position } from "./verify.ts";
+import { toIpa } from "./ipa.ts";
 // cmudict is full of surnames and rare words, so pairs only come from this common-word list.
 // Built once by scripts/make-common-words.ts and checked against the dictionary.
 import commonWords from "./common-words.json" with { type: "json" };
@@ -22,7 +23,7 @@ export const COMMON_ERRORS: Record<string, string> = {
   NG: "N",
 };
 
-export type Pair = { word: string; phones: string[] };
+export type Pair = { word: string; phones: string[]; ipa: string };
 
 let index: Map<string, string[]> | null = null;
 
@@ -64,5 +65,5 @@ export function minimalPair(word: string, target: string, position: Position, co
   const hit = reverseIndex()
     .get(swapped.join(" "))
     ?.find((w) => w !== word.toLowerCase());
-  return hit ? { word: hit, phones: swapped } : null;
+  return hit ? { word: hit, phones: swapped, ipa: toIpa(dictionary[hit]) } : null;
 }

@@ -1,0 +1,171 @@
+{
+  "key": "s-initial-1-2-school-6",
+  "input": {
+    "phoneme": "S",
+    "position": "initial",
+    "syllables": "1-2",
+    "theme": "school",
+    "age": 6,
+    "count": 8,
+    "singleton": false,
+    "contrast": "T"
+  },
+  "items": [
+    {
+      "word": "sit",
+      "sentence": "I sit down in my chair.",
+      "kid_definition": "to be in a chair or on the ground",
+      "verdict": {
+        "status": "pass",
+        "word": "sit",
+        "phones": [
+          "S",
+          "IH",
+          "T"
+        ],
+        "ipa": "sɪt"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/sit.mp3"
+    },
+    {
+      "word": "sun",
+      "sentence": "The sun is very bright today.",
+      "kid_definition": "the big hot light in the sky",
+      "verdict": {
+        "status": "pass",
+        "word": "sun",
+        "phones": [
+          "S",
+          "AH",
+          "N"
+        ],
+        "ipa": "sʌn"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/sun.mp3",
+      "pair": {
+        "word": "ton",
+        "phones": [
+          "T",
+          "AH",
+          "N"
+        ],
+        "ipa": "tʌn",
+        "audio": "/seeds/s-initial-1-2-school-6/ton.mp3"
+      }
+    },
+    {
+      "word": "see",
+      "sentence": "I see my friends at school.",
+      "kid_definition": "to look at something with your eyes",
+      "verdict": {
+        "status": "pass",
+        "word": "see",
+        "phones": [
+          "S",
+          "IY"
+        ],
+        "ipa": "si"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/see.mp3",
+      "pair": {
+        "word": "tea",
+        "phones": [
+          "T",
+          "IY"
+        ],
+        "ipa": "ti",
+        "audio": "/seeds/s-initial-1-2-school-6/tea.mp3"
+      }
+    },
+    {
+      "word": "school",
+      "sentence": "I go to school every day.",
+      "kid_definition": "a place where you go to learn",
+      "verdict": {
+        "status": "pass",
+        "word": "school",
+        "phones": [
+          "S",
+          "K",
+          "UW",
+          "L"
+        ],
+        "ipa": "skul"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/school.mp3"
+    },
+    {
+      "word": "said",
+      "sentence": "My teacher said it is time.",
+      "kid_definition": "spoke words out loud to someone",
+      "verdict": {
+        "status": "pass",
+        "word": "said",
+        "phones": [
+          "S",
+          "EH",
+          "D"
+        ],
+        "ipa": "sɛd"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/said.mp3"
+    },
+    {
+      "word": "small",
+      "sentence": "I have a small pencil today.",
+      "kid_definition": "not big or large in size",
+      "verdict": {
+        "status": "pass",
+        "word": "small",
+        "phones": [
+          "S",
+          "M",
+          "AO",
+          "L"
+        ],
+        "ipa": "smɔl"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/small.mp3"
+    },
+    {
+      "word": "stop",
+      "sentence": "We stop at the red light.",
+      "kid_definition": "to not move anymore and stay still",
+      "verdict": {
+        "status": "pass",
+        "word": "stop",
+        "phones": [
+          "S",
+          "T",
+          "AA",
+          "P"
+        ],
+        "ipa": "stɑp"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/stop.mp3"
+    },
+    {
+      "word": "start",
+      "sentence": "We start our lesson at nine.",
+      "kid_definition": "to begin something that was not going",
+      "verdict": {
+        "status": "pass",
+        "word": "start",
+        "phones": [
+          "S",
+          "T",
+          "AA",
+          "R",
+          "T"
+        ],
+        "ipa": "stɑrt"
+      },
+      "audio": "/seeds/s-initial-1-2-school-6/start.mp3"
+    }
+  ],
+  "proposed": 14,
+  "rounds": 1,
+  "source": "seed",
+  "model": "claude-haiku-4-5-20251001",
+  "generatedAt": "2026-09-26T23:13:47.232Z"
+}

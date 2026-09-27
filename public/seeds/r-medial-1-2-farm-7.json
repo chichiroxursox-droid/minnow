@@ -23,6 +23,7 @@
           "K",
           "IY"
         ],
+        "ipa": "tɝki",
         "reason": "T ER K IY: no R"
       }
     },
@@ -38,6 +39,7 @@
           "ER",
           "IY"
         ],
+        "ipa": "wɝi",
         "reason": "W ER IY: no R"
       }
     },
@@ -54,6 +56,7 @@
           "T",
           "IY"
         ],
+        "ipa": "dɝti",
         "reason": "D ER T IY: no R"
       }
     },
@@ -69,7 +72,8 @@
           "AA",
           "R",
           "N"
-        ]
+        ],
+        "ipa": "bɑrn"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/barn.mp3"
     },
@@ -85,7 +89,8 @@
           "AO",
           "R",
           "N"
-        ]
+        ],
+        "ipa": "kɔrn"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/corn.mp3"
     },
@@ -101,7 +106,8 @@
           "AO",
           "R",
           "S"
-        ]
+        ],
+        "ipa": "hɔrs"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/horse.mp3"
     },
@@ -117,7 +123,8 @@
           "AO",
           "R",
           "CH"
-        ]
+        ],
+        "ipa": "pɔrtʃ"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/porch.mp3"
     },
@@ -135,7 +142,8 @@
           "D",
           "AH",
           "N"
-        ]
+        ],
+        "ipa": "ɡɑrdən"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/garden.mp3"
     },
@@ -152,7 +160,8 @@
           "AH",
           "N",
           "JH"
-        ]
+        ],
+        "ipa": "ɔrəndʒ"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/orange.mp3"
     },
@@ -170,7 +179,8 @@
           "N",
           "IH",
           "NG"
-        ]
+        ],
+        "ipa": "mɔrnɪŋ"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/morning.mp3"
     },
@@ -186,7 +196,8 @@
           "EH",
           "R",
           "OW"
-        ]
+        ],
+        "ipa": "nɛroʊ"
       },
       "audio": "/seeds/r-medial-1-2-farm-7/narrow.mp3"
     }

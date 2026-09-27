@@ -3,16 +3,19 @@
 import { useEffect, useState } from "react";
 import type { PracticeSet, ProposeInput, SetItem } from "@/lib/propose";
 import type { Verdict } from "@/lib/verify";
-import { CONSONANTS, ipaFor } from "@/lib/ipa";
+import { ARPABET, CONSONANTS, ipaFor } from "@/lib/ipa";
 import { COMMON_ERRORS } from "@/lib/pairs";
-import { PRESETS } from "@/lib/seeds";
+import { PRESETS, SEEDS } from "@/lib/seeds";
+import { arrange, seedKey } from "@/lib/sets";
 import { SPEEDS } from "@/lib/tts";
 
 type Form = Omit<ProposeInput, "count">;
-type Checked = Verdict & { pair?: { word: string; phones: string[] } };
+type Checked = Verdict & { pair?: { word: string; phones: string[]; ipa: string } };
 const DEFAULT: Form = { phoneme: "K", position: "initial", syllables: "1-2", theme: "ocean", age: 6, singleton: false, contrast: "T" };
 const COUNT = 8;
 const SPEED_LABEL: Record<number, string> = { 1: "Normal", 0.85: "Slow", 0.7: "Slower" };
+const POSITIONS = ["initial", "medial", "final"] as const;
+const SYLLABLES = ["1-2", "3"] as const;
 
 const field = "mt-1 h-10 rounded-lg border border-sand-deep bg-shell px-3 text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.6)] outline-none focus:border-teal focus:ring-2 focus:ring-teal/25";
 const labelText = "block text-xs font-medium uppercase tracking-wide text-ink-soft";
@@ -21,9 +24,19 @@ const btn = "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm fon
 const btnQuiet = `${btn} border border-sand-deep bg-shell text-ink hover:bg-paper disabled:opacity-50`;
 const btnPlay = `${btn} border border-teal/40 bg-teal-mist/60 text-teal-deep hover:bg-teal-mist disabled:opacity-60`;
 
-function Mark() {
+/** The cached set for a target, arranged for display, or null when none is cached. */
+function cachedFor(form: Form): PracticeSet | null {
+  const seed = SEEDS[seedKey(form)];
+  return seed ? { ...seed, items: arrange(seed.items, COUNT) } : null;
+}
+
+function modelName(id: string) {
+  return id.startsWith("claude-haiku-4-5") ? "Claude Haiku 4.5" : id;
+}
+
+function Mark({ className = "" }: { className?: string }) {
   return (
-    <svg width="44" height="26" viewBox="0 0 44 26" fill="none" aria-hidden="true" className="shrink-0">
+    <svg width="44" height="26" viewBox="0 0 44 26" fill="none" aria-hidden="true" className={`shrink-0 ${className}`}>
       <ellipse cx="17" cy="13" rx="15" ry="8" fill="var(--color-teal)" />
       <path d="M30 13l11-7-3.5 7 3.5 7z" fill="var(--color-teal)" />
       <circle cx="9" cy="11.5" r="1.8" fill="var(--color-paper)" />
@@ -53,6 +66,7 @@ function Seg<T extends string | number>({ value, options, label, onChange }: { v
         <button
           key={String(o)}
           type="button"
+          aria-pressed={o === value}
           onClick={() => onChange(o)}
           className={`rounded-md px-3 py-1 transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-teal/40 ${
             o === value ? "bg-ink text-paper" : "text-ink-soft hover:bg-paper hover:text-ink"
@@ -65,15 +79,44 @@ function Seg<T extends string | number>({ value, options, label, onChange }: { v
   );
 }
 
+/** ARPAbet from the dictionary, then broad IPA, so an SLP can read either. */
 function Phones({ v, tone = "muted" }: { v: Verdict; tone?: "muted" | "coral" }) {
   const text = v.status === "unverified" ? v.reason : v.status === "fail" ? v.reason : v.phones.join(" ");
-  return <span className={`font-mono text-[11px] tracking-wide ${tone === "coral" ? "text-coral" : "text-ink-soft"}`}>{text}</span>;
+  const ipa = v.status === "unverified" ? null : v.ipa;
+  return (
+    <span className={`font-mono text-[11px] tracking-wide ${tone === "coral" ? "text-coral" : "text-ink-soft"}`}>
+      {text}
+      {ipa && <span className="ml-2 font-sans text-xs tracking-normal">/{ipa}/</span>}
+    </span>
+  );
+}
+
+function Skeleton() {
+  return (
+    <ul className="mt-3 grid gap-4 sm:grid-cols-2" aria-hidden="true">
+      {Array.from({ length: COUNT }, (_, i) => (
+        <li key={i} className="rounded-2xl border border-sand bg-shell p-4">
+          <div className="flex gap-4">
+            <div className="shimmer h-24 w-24 shrink-0 rounded-xl" />
+            <div className="flex-1 space-y-2 pt-1">
+              <div className="shimmer h-7 w-2/5 rounded-md" />
+              <div className="shimmer h-3 w-1/3 rounded" />
+              <div className="shimmer mt-4 h-4 w-full rounded" />
+              <div className="shimmer h-3 w-4/5 rounded" />
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 export default function Home() {
   const [form, setForm] = useState<Form>(DEFAULT);
-  const [set, setSet] = useState<PracticeSet | null>(null);
+  const [set, setSet] = useState<PracticeSet | null>(() => cachedFor(DEFAULT));
+  const [starter, setStarter] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [check, setCheck] = useState("");
   const [checked, setChecked] = useState<Checked | null>(null);
@@ -90,6 +133,42 @@ export default function Home() {
     setForm({ ...form, phoneme, contrast: COMMON_ERRORS[phoneme] ?? "" });
   }
 
+  // Shareable target: read it from the URL once, then keep the URL in sync.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    if (![...q.keys()].length) return;
+    const next: Form = { ...DEFAULT };
+    const sound = q.get("sound");
+    if (sound && ARPABET.has(sound)) next.phoneme = sound;
+    const position = q.get("position");
+    if (position && (POSITIONS as readonly string[]).includes(position)) next.position = position as Form["position"];
+    const syllables = q.get("syllables");
+    if (syllables && (SYLLABLES as readonly string[]).includes(syllables)) next.syllables = syllables as Form["syllables"];
+    const theme = q.get("theme");
+    if (theme?.trim()) next.theme = theme.trim().slice(0, 40);
+    const age = Number(q.get("age"));
+    if (age >= 2 && age <= 18) next.age = age;
+    const says = q.get("says");
+    next.contrast = says === null ? (COMMON_ERRORS[next.phoneme] ?? "") : says === "" || ARPABET.has(says) ? says : "";
+    next.singleton = q.get("singletons") === "1";
+    setForm(next);
+  }, []);
+  useEffect(() => {
+    const q = new URLSearchParams({ sound: form.phoneme, position: form.position, syllables: form.syllables, theme: form.theme, age: String(form.age), says: form.contrast });
+    if (form.singleton) q.set("singletons", "1");
+    window.history.replaceState(null, "", `?${q}`);
+    // Until the first live build, show whatever is cached for the current target.
+    if (starter && !loading) setSet(cachedFor(form));
+  }, [form, starter, loading]);
+
+  useEffect(() => {
+    if (!loading) return;
+    setElapsed(0);
+    const t0 = Date.now();
+    const id = setInterval(() => setElapsed(Math.floor((Date.now() - t0) / 1000)), 250);
+    return () => clearInterval(id);
+  }, [loading]);
+
   async function build() {
     setLoading(true);
     setError(null);
@@ -103,6 +182,7 @@ export default function Home() {
       const j = await r.json();
       if (!r.ok) throw new Error(j.error ?? `Request failed (${r.status})`);
       setSet(j);
+      setStarter(false);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong");
     } finally {
@@ -182,12 +262,10 @@ export default function Home() {
             Minnow
           </h1>
         </div>
-        <div>
-          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-            Articulation practice sets an SLP can trust. Claude proposes the words, the CMU Pronouncing Dictionary
-            verifies every one, and ElevenLabs says them out loud.
-          </p>
-        </div>
+        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-soft">
+          Articulation practice sets an SLP can trust. Claude proposes the words, the CMU Pronouncing Dictionary
+          verifies every one, and ElevenLabs says them out loud.
+        </p>
       </header>
 
       <section className="rounded-2xl border border-sand bg-shell p-5 shadow-card print:hidden">
@@ -205,13 +283,13 @@ export default function Home() {
           <label className="text-sm">
             <span className={labelText}>Position</span>
             <div className="mt-1">
-              <Seg value={form.position} options={["initial", "medial", "final"] as const} onChange={(position) => setForm({ ...form, position })} />
+              <Seg value={form.position} options={POSITIONS} onChange={(position) => setForm({ ...form, position })} />
             </div>
           </label>
           <label className="text-sm">
             <span className={labelText}>Syllables</span>
             <div className="mt-1">
-              <Seg value={form.syllables} options={["1-2", "3"] as const} onChange={(syllables) => setForm({ ...form, syllables })} />
+              <Seg value={form.syllables} options={SYLLABLES} onChange={(syllables) => setForm({ ...form, syllables })} />
             </div>
           </label>
           <label className="text-sm">
@@ -267,39 +345,56 @@ export default function Home() {
           <span className={labelPlain}>Check a word against {label}</span>
           <input value={check} onChange={(e) => setCheck(e.target.value)} placeholder="type any word" className={`${field} w-full max-w-sm`} />
         </label>
-        {checked && (
-          <div
-            data-testid="check-result"
-            className={`mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg px-3 py-2 text-sm ${
-              checked.status === "pass" ? "bg-teal-mist text-teal-deep" : checked.status === "fail" ? "bg-coral-mist text-coral" : "bg-paper text-ink-soft"
-            }`}
-          >
-            <span className={`font-display text-lg font-semibold ${checked.status === "fail" ? "line-through decoration-coral/70" : ""}`}>{checked.word}</span>
-            <span className="text-xs font-medium uppercase tracking-wide">
-              {checked.status === "pass" ? "verified" : checked.status === "fail" ? "rejected" : "unverified"}
-            </span>
-            <span className="basis-full">
-              <Phones v={checked} tone={checked.status === "fail" ? "coral" : "muted"} />
-            </span>
-            {checked.pair && (
-              <span className="basis-full text-teal-deep">
-                Minimal pair with {contrastLabel}: <span className="font-semibold">{checked.pair.word}</span>{" "}
-                <span className="font-mono text-[11px] tracking-wide">{checked.pair.phones.join(" ")}</span>
+        <div aria-live="polite">
+          {checked && (
+            <div
+              data-testid="check-result"
+              className={`mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-lg px-3 py-2 text-sm ${
+                checked.status === "pass" ? "bg-teal-mist text-teal-deep" : checked.status === "fail" ? "bg-coral-mist text-coral" : "bg-paper text-ink-soft"
+              }`}
+            >
+              <span className={`font-display text-lg font-semibold ${checked.status === "fail" ? "line-through decoration-coral/70" : ""}`}>{checked.word}</span>
+              <span className="text-xs font-medium uppercase tracking-wide">
+                {checked.status === "pass" ? "verified" : checked.status === "fail" ? "rejected" : "unverified"}
               </span>
-            )}
-          </div>
-        )}
+              <span className="basis-full">
+                <Phones v={checked} tone={checked.status === "fail" ? "coral" : "muted"} />
+              </span>
+              {checked.pair && (
+                <span className="basis-full text-teal-deep">
+                  Minimal pair with {contrastLabel}: <span className="font-semibold">{checked.pair.word}</span>{" "}
+                  <span className="font-mono text-[11px] tracking-wide">{checked.pair.phones.join(" ")}</span> <span className="text-xs">/{checked.pair.ipa}/</span>
+                </span>
+              )}
+            </div>
+          )}
+        </div>
       </section>
 
       {error && <p className="mt-5 rounded-lg bg-coral-mist px-4 py-3 text-sm text-coral print:hidden">{error}</p>}
 
-      {set && (
+      {loading && (
+        <section className="rise mt-8 print:hidden" data-testid="loading" aria-busy="true">
+          <div className="flex items-center gap-4 rounded-2xl border border-sand bg-shell p-5 shadow-card">
+            <Mark className="swim" />
+            <div className="min-w-0">
+              <p className="font-display text-xl font-semibold text-ink">Building your set</p>
+              <p className="text-sm text-ink-soft">Asking Claude Haiku 4.5 for {COUNT * 2} words, then checking every one in the dictionary.</p>
+            </div>
+            <span className="ml-auto font-mono text-sm tabular-nums text-ink-soft">{elapsed}s</span>
+          </div>
+          <Skeleton />
+        </section>
+      )}
+
+      {set && !loading && (
         <section className="rise mt-8 print:mt-0" key={set.generatedAt}>
           <p className="text-sm leading-relaxed text-ink-soft print:hidden">
-            <span className="font-medium text-ink">{set.source === "live" ? `Live from ${set.model}` : "Cached set"}</span> · {label} · theme{" "}
-            {set.input.theme} · age {set.input.age} · {set.proposed} proposed{(set.rounds ?? 1) > 1 ? ` in ${set.rounds} rounds` : ""} ·{" "}
+            <span className="font-medium text-ink">{starter ? "Cached starter set" : set.source === "live" ? `Live from ${modelName(set.model)}` : "Cached set"}</span> ·{" "}
+            {label} · theme {set.input.theme} · age {set.input.age} · {set.proposed} proposed{(set.rounds ?? 1) > 1 ? ` in ${set.rounds} rounds` : ""} ·{" "}
             <span className={rejects.length ? "text-coral" : ""}>{rejects.length} rejected</span> ·{" "}
             <span className="text-teal-deep">{passes.length} kept</span>
+            {starter && <span> · Build set makes a fresh one live</span>}
           </p>
           {set.note && <p className="mt-1 text-sm text-amber print:hidden">{set.note}</p>}
 
@@ -363,6 +458,7 @@ export default function Home() {
                       <span>Minimal pair with {contrastLabel}:</span>
                       <span className="font-display text-base font-semibold">{it.pair.word}</span>
                       <span className="font-mono text-[11px] tracking-wide">{it.pair.phones.join(" ")}</span>
+                      <span className="text-xs">/{it.pair.ipa}/</span>
                       <button
                         type="button"
                         onClick={() => play(it.pair!.word, it.pair!.audio)}

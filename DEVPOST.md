@@ -19,7 +19,7 @@ Next.js 15 on Vercel, one structured call to Claude Haiku 4.5 through the AI SDK
 
 ElevenLabs is the voice. Every verified word gets a Play button. Cached practice words were synthesized once with `eleven_flash_v2_5` and stored as MP3s in the repo. New words are voiced live through the ElevenLabs API, and live words that match a cached one reuse the file. A usage guard stops live synthesis before the free plan runs dry, so cached audio always keeps playing.
 
-Three practice sets ship cached, so the whole demo path, including Play, works with every API key removed.
+Six practice sets ship cached, so the whole demo path, including Play, works with every API key removed. Phonemes show in both ARPAbet and IPA, since IPA is what SLPs read. The demo video is narrated by the same ElevenLabs voice.
 
 ## Challenges
 

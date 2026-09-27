@@ -24,6 +24,7 @@
           "R",
           "Z"
         ],
+        "ipa": "stɑrz",
         "reason": "S T AA R Z: ends with Z, not S"
       }
     },
@@ -39,7 +40,8 @@
           "P",
           "EY",
           "S"
-        ]
+        ],
+        "ipa": "speɪs"
       },
       "audio": "/seeds/s-final-1-2-space-8/space.mp3"
     },
@@ -55,7 +57,8 @@
           "L",
           "AE",
           "S"
-        ]
+        ],
+        "ipa": "ɡlæs"
       },
       "audio": "/seeds/s-final-1-2-space-8/glass.mp3"
     },
@@ -70,7 +73,8 @@
           "P",
           "AE",
           "S"
-        ]
+        ],
+        "ipa": "pæs"
       },
       "audio": "/seeds/s-final-1-2-space-8/pass.mp3",
       "pair": {
@@ -80,6 +84,7 @@
           "AE",
           "T"
         ],
+        "ipa": "pæt",
         "audio": "/seeds/s-final-1-2-space-8/pat.mp3"
       }
     },
@@ -95,7 +100,8 @@
           "L",
           "AE",
           "S"
-        ]
+        ],
+        "ipa": "klæs"
       },
       "audio": "/seeds/s-final-1-2-space-8/class.mp3"
     },
@@ -110,7 +116,8 @@
           "G",
           "AE",
           "S"
-        ]
+        ],
+        "ipa": "ɡæs"
       },
       "audio": "/seeds/s-final-1-2-space-8/gas.mp3"
     },
@@ -125,7 +132,8 @@
           "M",
           "AE",
           "S"
-        ]
+        ],
+        "ipa": "mæs"
       },
       "audio": "/seeds/s-final-1-2-space-8/mass.mp3",
       "pair": {
@@ -135,6 +143,7 @@
           "AE",
           "T"
         ],
+        "ipa": "mæt",
         "audio": "/seeds/s-final-1-2-space-8/mat.mp3"
       }
     },
@@ -149,7 +158,8 @@
           "B",
           "AH",
           "S"
-        ]
+        ],
+        "ipa": "bʌs"
       },
       "audio": "/seeds/s-final-1-2-space-8/bus.mp3",
       "pair": {
@@ -159,6 +169,7 @@
           "AH",
           "T"
         ],
+        "ipa": "bʌt",
         "audio": "/seeds/s-final-1-2-space-8/but.mp3"
       }
     },
@@ -173,7 +184,8 @@
           "L",
           "AO",
           "S"
-        ]
+        ],
+        "ipa": "lɔs"
       },
       "audio": "/seeds/s-final-1-2-space-8/loss.mp3"
     }

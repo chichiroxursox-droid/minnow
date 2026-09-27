@@ -1,4 +1,5 @@
 import { dictionary } from "cmu-pronouncing-dictionary";
+import { toIpa } from "./ipa.ts";
 
 export type Position = "initial" | "medial" | "final";
 export type SyllableRange = "1-2" | "3";
@@ -13,8 +14,8 @@ export type Target = {
 };
 
 export type Verdict =
-  | { status: "pass"; word: string; phones: string[] }
-  | { status: "fail"; word: string; phones: string[]; reason: string }
+  | { status: "pass"; word: string; phones: string[]; ipa: string }
+  | { status: "fail"; word: string; phones: string[]; ipa: string; reason: string }
   | { status: "unverified"; word: string; reason: string };
 
 const VOWELS = new Set([
@@ -29,9 +30,14 @@ export function normalizeWord(word: string): string {
   return word.toLowerCase().trim().replace(/[^a-z']/g, "");
 }
 
+/** The raw cmudict entry with stress digits, or null when the word is not in the dictionary. */
+export function rawEntry(word: string): string | null {
+  return dictionary[normalizeWord(word)] ?? null;
+}
+
 /** Dictionary phones with stress digits removed, or null when the word is not in cmudict. */
 export function phonesFor(word: string): string[] | null {
-  const entry = dictionary[normalizeWord(word)];
+  const entry = rawEntry(word);
   return entry ? entry.split(" ").map(stripStress) : null;
 }
 
@@ -46,12 +52,14 @@ function isSingletonAt(phones: string[], i: number): boolean {
 }
 
 export function verify(word: string, target: Target): Verdict {
-  const phones = phonesFor(word);
-  if (!phones) return { status: "unverified", word, reason: "Not in the CMU dictionary" };
+  const raw = rawEntry(word);
+  if (!raw) return { status: "unverified", word, reason: "Not in the CMU dictionary" };
+  const phones = raw.split(" ").map(stripStress);
+  const ipa = toIpa(raw);
 
   const t = target.phoneme.toUpperCase();
   const spelled = phones.join(" ");
-  const fail = (reason: string): Verdict => ({ status: "fail", word, phones, reason: `${spelled}: ${reason}` });
+  const fail = (reason: string): Verdict => ({ status: "fail", word, phones, ipa, reason: `${spelled}: ${reason}` });
   const last = phones.length - 1;
 
   // Position: which indexes count as a hit for this position.
@@ -77,5 +85,5 @@ export function verify(word: string, target: Target): Verdict {
     return fail(`${t} is in a consonant cluster`);
   }
 
-  return { status: "pass", word, phones };
+  return { status: "pass", word, phones, ipa };
 }

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { minimalPair, COMMON_ERRORS } from "./pairs.ts";
 
 test("fronting pairs for /k/ initial come from the dictionary", () => {
-  assert.deepEqual(minimalPair("cape", "K", "initial", "T"), { word: "tape", phones: ["T", "EY", "P"] });
+  assert.deepEqual(minimalPair("cape", "K", "initial", "T"), { word: "tape", phones: ["T", "EY", "P"], ipa: "teɪp" });
   assert.equal(minimalPair("coast", "K", "initial", "T")?.word, "toast");
   assert.equal(minimalPair("kite", "K", "initial", "T")?.word, "tight");
   assert.equal(minimalPair("key", "K", "initial", "T")?.word, "tea");

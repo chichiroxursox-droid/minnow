@@ -4,7 +4,7 @@
 // re-synthesizes a word that already has an MP3 on disk.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { proposeLive, seedKey, type PracticeSet, type ProposeInput } from "../lib/propose.ts";
-import { normalizeWord } from "../lib/verify.ts";
+import { normalizeWord, verify } from "../lib/verify.ts";
 import { assertUnderCeiling, synthesize, usage } from "../lib/tts.ts";
 import { COMMON_ERRORS, minimalPair } from "../lib/pairs.ts";
 
@@ -14,6 +14,9 @@ const TARGETS: ProposeInput[] = [
   { phoneme: "K", position: "initial", syllables: "1-2", theme: "ocean", age: 6, count: 8, singleton: false, contrast: "T" },
   { phoneme: "R", position: "medial", syllables: "1-2", theme: "farm", age: 7, count: 8, singleton: false, contrast: "W" },
   { phoneme: "S", position: "final", syllables: "1-2", theme: "space", age: 8, count: 8, singleton: false, contrast: "T" },
+  { phoneme: "S", position: "initial", syllables: "1-2", theme: "school", age: 6, count: 8, singleton: false, contrast: "T" },
+  { phoneme: "L", position: "initial", syllables: "1-2", theme: "zoo", age: 5, count: 8, singleton: false, contrast: "W" },
+  { phoneme: "SH", position: "initial", syllables: "1-2", theme: "kitchen", age: 7, count: 8, singleton: false, contrast: "S" },
 ];
 
 const only = process.argv[2];
@@ -28,6 +31,8 @@ for (const input of TARGETS) {
   let set: PracticeSet;
   if (existsSync(jsonPath)) {
     set = JSON.parse(readFileSync(jsonPath, "utf8"));
+    // Re-verify so verdict fields added since (like IPA) land in the cached JSON. Dictionary only, no cost.
+    for (const it of set.items) it.verdict = verify(it.word, input);
     console.log(`${key}: reusing cached JSON (${set.items.length} items)`);
   } else {
     set = await proposeLive(input, 20000);

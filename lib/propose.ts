@@ -3,6 +3,9 @@ import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
 import { verify, type Verdict } from "./verify.ts";
 import { ipaFor } from "./ipa.ts";
+import { arrange, seedKey } from "./sets.ts";
+
+export { arrange, seedKey };
 
 export const ProposeInput = z.object({
   phoneme: z.string().regex(/^[A-Z]{1,2}$/, "ARPAbet consonant"),
@@ -34,7 +37,7 @@ export type SetItem = z.infer<typeof Items>["items"][number] & {
   /** Path to a cached illustration under /public/seeds, when one exists. */
   image?: string;
   /** Dictionary-derived minimal pair for the requested contrast sound, when one exists. */
-  pair?: { word: string; phones: string[]; audio?: string };
+  pair?: { word: string; phones: string[]; ipa: string; audio?: string };
 };
 
 export type PracticeSet = {
@@ -51,15 +54,7 @@ export type PracticeSet = {
   note?: string;
 };
 
-export function seedKey(input: ProposeInput): string {
-  const theme = input.theme.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  return `${input.phoneme}-${input.position}-${input.syllables}-${theme}-${input.age}`.toLowerCase();
-}
-
 export const DEFAULT_MODEL = "claude-haiku-4-5-20251001";
-
-/** Order for display: rejects first, then verified words, then unverified words last. */
-const RANK: Record<Verdict["status"], number> = { fail: 0, pass: 1, unverified: 2 };
 
 function reasonFor(v: Verdict): string {
   return v.status === "fail" ? v.reason : "not in the pronunciation dictionary";
@@ -136,15 +131,4 @@ export async function proposeLive(input: ProposeInput, timeoutMs = 8000): Promis
     generatedAt: new Date().toISOString(),
     ...(note ? { note } : {}),
   };
-}
-
-/**
- * Rejects first, then at most `count` verified words, then unverified words last.
- * Surplus passes are dropped; a short list is never padded with unverified words.
- */
-export function arrange(items: SetItem[], count: number): SetItem[] {
-  let kept = 0;
-  return [...items]
-    .sort((a, b) => RANK[a.verdict.status] - RANK[b.verdict.status])
-    .filter((it) => it.verdict.status !== "pass" || kept++ < count);
 }

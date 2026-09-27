@@ -58,9 +58,36 @@ body {
 .pulse-dot {
   animation: pulse-dot 900ms ease-in-out infinite;
 }
+/* Loading screen: the minnow swims while the model thinks; skeleton cards shimmer below. */
+@keyframes swim {
+  0% {
+    transform: translateX(-10px) rotate(-4deg);
+  }
+  100% {
+    transform: translateX(10px) rotate(4deg);
+  }
+}
+.swim {
+  animation: swim 1.4s ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--color-sand) 25%, var(--color-paper) 50%, var(--color-sand) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
 @media (prefers-reduced-motion: reduce) {
   .rise,
-  .pulse-dot {
+  .pulse-dot,
+  .swim,
+  .shimmer {
     animation: none;
   }
 }

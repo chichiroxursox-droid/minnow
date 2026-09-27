@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { ProposeInput, arrange, proposeLive, seedKey, type PracticeSet } from "@/lib/propose";
+import { ProposeInput, proposeLive, type PracticeSet } from "@/lib/propose";
+import { arrange, seedKey } from "@/lib/sets";
 import { verify } from "@/lib/verify";
 import { minimalPair } from "@/lib/pairs";
 import { SEEDS } from "@/lib/seeds";

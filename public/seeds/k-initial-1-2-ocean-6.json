@@ -22,7 +22,8 @@
           "EH",
           "L",
           "P"
-        ]
+        ],
+        "ipa": "kɛlp"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/kelp.mp3"
     },
@@ -38,7 +39,8 @@
           "R",
           "AE",
           "B"
-        ]
+        ],
+        "ipa": "kræb"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/crab.mp3",
       "image": "/seeds/k-initial-1-2-ocean-6/crab.jpg"
@@ -56,7 +58,8 @@
           "R",
           "AH",
           "L"
-        ]
+        ],
+        "ipa": "kɔrəl"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/coral.mp3",
       "image": "/seeds/k-initial-1-2-ocean-6/coral.jpg"
@@ -73,7 +76,8 @@
           "AY",
           "AE",
           "K"
-        ]
+        ],
+        "ipa": "kaɪæk"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/kayak.mp3"
     },
@@ -90,7 +94,8 @@
           "AH",
           "N",
           "T"
-        ]
+        ],
+        "ipa": "kɝənt"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/current.mp3"
     },
@@ -105,7 +110,8 @@
           "K",
           "OW",
           "V"
-        ]
+        ],
+        "ipa": "koʊv"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/cove.mp3"
     },
@@ -122,7 +128,8 @@
           "B",
           "AH",
           "N"
-        ]
+        ],
+        "ipa": "kæbən"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/cabin.mp3"
     },
@@ -137,7 +144,8 @@
           "K",
           "AY",
           "T"
-        ]
+        ],
+        "ipa": "kaɪt"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/kite.mp3",
       "pair": {
@@ -147,6 +155,7 @@
           "AY",
           "T"
         ],
+        "ipa": "taɪt",
         "audio": "/seeds/k-initial-1-2-ocean-6/tight.mp3"
       }
     },
@@ -162,7 +171,8 @@
           "OW",
           "S",
           "T"
-        ]
+        ],
+        "ipa": "koʊst"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/coast.mp3",
       "pair": {
@@ -173,6 +183,7 @@
           "S",
           "T"
         ],
+        "ipa": "toʊst",
         "audio": "/seeds/k-initial-1-2-ocean-6/toast.mp3"
       }
     },
@@ -188,7 +199,8 @@
           "AO",
           "R",
           "K"
-        ]
+        ],
+        "ipa": "kɔrk"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/cork.mp3"
     },
@@ -203,7 +215,8 @@
           "K",
           "AA",
           "M"
-        ]
+        ],
+        "ipa": "kɑm"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/calm.mp3"
     },
@@ -218,7 +231,8 @@
           "K",
           "R",
           "UW"
-        ]
+        ],
+        "ipa": "kru"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/crew.mp3",
       "pair": {
@@ -228,6 +242,7 @@
           "R",
           "UW"
         ],
+        "ipa": "tru",
         "audio": "/seeds/k-initial-1-2-ocean-6/true.mp3"
       }
     },
@@ -242,7 +257,8 @@
           "K",
           "AE",
           "CH"
-        ]
+        ],
+        "ipa": "kætʃ"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/catch.mp3"
     },
@@ -257,7 +273,8 @@
           "K",
           "IH",
           "D"
-        ]
+        ],
+        "ipa": "kɪd"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/kid.mp3"
     },
@@ -273,7 +290,8 @@
           "UW",
           "L",
           "ER"
-        ]
+        ],
+        "ipa": "kulɚ"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/cooler.mp3"
     },
@@ -291,7 +309,8 @@
           "D",
           "AH",
           "M"
-        ]
+        ],
+        "ipa": "kɪŋdəm"
       },
       "audio": "/seeds/k-initial-1-2-ocean-6/kingdom.mp3"
     }
