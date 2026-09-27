@@ -21,6 +21,15 @@ const CORE =
   "gum hum sum drum ring king sing wing thing gap rap sap zap clap flap slap snap trap wrap rip chip clip drip flip grip skip slip " +
   "trip whip wet pet set met net jet let get bet vet yet sun fun bus gas mass pass class glass lot loss toss boss moss dot";
 
+// Never offered as a pair: words unsuitable for children, and rare spellings that would beat the
+// common homophone because the pair picker prefers the shortest spelling (tic over tick, gnu over new).
+const BLOCK = new Set(
+  (
+    "tit tits ass arse sex sexy damn hell crap cock dick fag nazi piss shit slut whore boob boobs butt poop pee turd " +
+    "tic tho thru gnu titan tole tarry undue timbre theatre grey troupe teem rein reign plumb suite"
+  ).split(" "),
+);
+
 const skipModel = process.argv.includes("--no-model");
 // Plain text, one word per line: a truncated reply still yields a usable list.
 const { text } = skipModel ? { text: "" } : await generateText({
@@ -40,7 +49,7 @@ const existing: string[] = existsSync("lib/common-words.json") ? JSON.parse(read
 const proposed = [...existing, ...CORE.split(" "), ...text.split(/\s+/)];
 const words = proposed
   .map((w) => w.toLowerCase().trim())
-  .filter((w) => /^[a-z]{2,}$/.test(w) && w in dictionary && !seen.has(w) && seen.add(w))
+  .filter((w) => /^[a-z]{2,}$/.test(w) && w in dictionary && !BLOCK.has(w) && !seen.has(w) && seen.add(w))
   .sort();
 
 writeFileSync("lib/common-words.json", JSON.stringify(words) + "\n");

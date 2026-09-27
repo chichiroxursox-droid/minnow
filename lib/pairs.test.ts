@@ -9,6 +9,10 @@ test("fronting pairs for /k/ initial come from the dictionary", () => {
   assert.equal(minimalPair("key", "K", "initial", "T")?.word, "tea");
 });
 
+test("the common spelling wins over a rare homophone", () => {
+  assert.equal(minimalPair("kick", "K", "initial", "T")?.word, "tick");
+});
+
 test("final position swaps the last phone", () => {
   assert.equal(minimalPair("bus", "S", "final", "T")?.word, "but");
   assert.equal(minimalPair("pass", "S", "final", "T")?.word, "pat");

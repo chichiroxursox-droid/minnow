@@ -48,7 +48,7 @@ const size = device.viewport;
   await buildLive();
   await pause(1200);
   await page.locator('[data-testid="passes"]').scrollIntoViewIfNeeded();
-  await pause(3500);
+  await pause(5000);
   await shot("02-built");
 
   // Judge types words into the check box.
@@ -78,11 +78,12 @@ const size = device.viewport;
   await page.getByRole("button", { name: /^Play yours / }).first().click();
   await pause(1500);
   await shot("06c-played-back");
+  await pause(2000);
   // Slow the model voice down.
   beat("slow");
   await page.getByRole("button", { name: "Slow", exact: true }).click();
   await play.click();
-  await pause(2500);
+  await pause(3300);
   await shot("06d-slow");
 
   // Switch to the /r/ medial seed: the cached set shows at once, rejects first.
@@ -90,7 +91,7 @@ const size = device.viewport;
   beat("rmedial");
   await page.getByRole("button", { name: /\/r\/ medial/ }).click();
   await page.waitForSelector('[data-testid="rejects"]');
-  await pause(1500);
+  await pause(4000);
   await page.locator('[data-testid="rejects"]').scrollIntoViewIfNeeded();
   beat("rejects");
   await pause(7000);
@@ -106,7 +107,7 @@ const size = device.viewport;
   await page.getByRole("button", { name: /^l start/ }).click();
   await page.waitForSelector('[data-testid="flashcards"]');
   await page.locator('[data-testid="flashcards"]').scrollIntoViewIfNeeded();
-  await pause(4500);
+  await pause(5500);
   const hear = page.getByRole("button", { name: /^Play / }).first();
   beat("hear", { word: (await hear.getAttribute("aria-label")).replace(/^Play /, "") });
   await hear.click();

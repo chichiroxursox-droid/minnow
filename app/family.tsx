@@ -85,7 +85,7 @@ export function FamilyView(p: Props) {
               <Seg size="lg" value={FROM_POSITION[form.position]} options={WHERE} onChange={(w) => setForm({ ...form, position: TO_POSITION[w] })} />
             </div>
           </div>
-          <label className="min-w-0 flex-1">
+          <label className="min-w-[14rem] flex-1">
             <span className="block font-display text-xl font-semibold text-ink">What do they love?</span>
             <input
               value={form.theme}
