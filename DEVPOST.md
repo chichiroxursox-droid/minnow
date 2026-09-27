@@ -5,34 +5,49 @@
 **Live:** https://minnow-chiethan.vercel.app
 **Code:** https://github.com/chichiroxursox-droid/minnow
 
-## Inspiration
+## Elevator pitch
 
-Speech-language pathologists build articulation practice sets by hand: eight words with /k/ at the start, one or two syllables, something a six-year-old cares about. Language models are happy to write that list, and they get it subtly wrong. "Knot" starts with the letter k and the sound /n/. "Stars" ends in /z/, not /s/. "Turkey" has the letter r but no consonant /r/. A clinician who trusts the list drills the wrong sound. Minnow lets the model do the creative part and makes a dictionary do the checking.
+Speech practice words you can trust. Claude suggests them, a pronunciation dictionary checks every sound, and ElevenLabs says them out loud for kids to copy.
 
-## What it does
+## About the project
 
-Pick a sound, a position (initial, medial, final), a syllable range, a theme, and an age. Claude Haiku 4.5 proposes twice as many words as you asked for, each with a short sentence and a kid definition. Every word is looked up in the CMU Pronouncing Dictionary and checked against the target. Rejected words are shown first, struck through, with the dictionary's actual phonemes as the reason: "N AA T: starts with N, not K." Verified words become picture cards with a Play button, voiced by ElevenLabs at normal or slow speed. Pick what the child says instead of the target and every card shows its real minimal pair from the dictionary: cape and tape, bus and but. "Your turn" records the child in the browser and plays both back; nothing is uploaded. One click prints a homework sheet. A check-a-word box gives an instant verdict on anything the clinician types, with no AI involved.
+### Inspiration
 
-## How I built it
+Speech-language pathologists build articulation practice sets by hand: eight words that start with /k/, one or two syllables, about something a six-year-old loves. A language model writes that list instantly and gets it subtly wrong. "Knot" is spelled with a k but starts with /n/. "Stars" ends in /z/, not /s/. "Turkey" has an r but no consonant /r/. A child who drills a wrong word practices the wrong sound.
 
-Next.js 15 on Vercel, one structured call to Claude Haiku 4.5 through the AI SDK, and a verifier in about 70 lines of TypeScript on top of the cmudict package. The verifier strips stress digits, checks the target phone's position, counts vowel phones for syllables, and optionally rejects consonant clusters. It has its own test suite under the Node test runner. When too few words survive, the rejects and their phonemes go back to the model once for replacements, so the dictionary is feedback, not just a filter.
+### What it does
 
-ElevenLabs is the voice. Every verified word gets a Play button. Cached practice words were synthesized once with `eleven_flash_v2_5` and stored as MP3s in the repo. New words are voiced live through the ElevenLabs API, and live words that match a cached one reuse the file. A usage guard stops live synthesis before the free plan runs dry, so cached audio always keeps playing.
+**Therapist mode.** Pick a sound, position, syllable count, theme, and age. Claude Haiku 4.5 proposes twice the words needed and the CMU Pronouncing Dictionary checks each one. Rejects come first, struck through, with the dictionary's phonemes as the reason: `N AA T: starts with N, not K`, plus the IPA /nɑt/. Verified words become picture cards with a sentence, a minimal pair for the child's usual error (kite and tight), and a Play button voiced by ElevenLabs at normal or slow speed. A check box verifies any word, and one click prints a homework sheet.
 
-A family mode strips it to the essentials for parents and kids: pick a sound, then one picture card at a time with Hear it, Your turn, and Next. Six practice sets ship cached, so everything works with every API key removed. Phonemes show in ARPAbet and IPA. The demo video is narrated by the same ElevenLabs voice.
+**Family mode.** Twelve big sound buttons ("k as in kite"), start, middle, or end, then one picture card at a time with Hear it, Your turn, and Next. Only verified words appear.
 
-## Challenges
+### How I built it
 
-The model reads ARPAbet "K" as the letter k and offers "kidney" for an ocean theme, so the prompt says the sound matters, not the spelling. It cannot count syllables at all; three-syllable sets came back almost empty until the rejects were fed back. Minimal pairs from the raw dictionary paired "coral" with the surname "tearle", so pairs are limited to a common-word list.
+Next.js 15 on Vercel, one structured call to Claude Haiku 4.5 through the AI SDK, and a verifier of about 90 lines of TypeScript over the CMU dictionary. It strips stress digits, checks where the target phone sits, and counts vowel phones as syllables. For /k/ at the start of a one or two syllable word:
 
-## What I learned
+$$\text{keep}(w)\iff p_1=\text{K}\;\land\;1\le\big|\{i:p_i\in V\}\big|\le2$$
 
-The interesting bugs are phonetic, not technical. Vocalic /r/ is a vowel (ER) in ARPAbet, so "farmer" has one consonant /r/ and "turkey" has none. Plural s is usually /z/. A dictionary catches those every time and a language model catches them most of the time, which is not good enough for therapy.
+where $p_1\dots p_n$ are the word's dictionary phones and $V$ is the 15 ARPAbet vowels. It has its own test suite.
+
+Minimal pairs are computed, not generated: swap the target phone for the error sound and look the result up in a reverse index of about 2,900 common words. Every cached word and pair was voiced once with ElevenLabs `eleven_flash_v2_5` and saved, along with 22 pictures. Six practice sets ship cached, so the demo works with every API key removed.
+
+### Challenges
+
+- The model read ARPAbet `K` as the letter k and offered "kidney" for an ocean theme.
+- It cannot count syllables. A three-syllable /k/ set kept 1 word of 16. Sending the rejects and their phonemes back for one more round now keeps 7 or 8, so the dictionary is feedback, not just a filter.
+- The raw dictionary is full of surnames and rare spellings: "coral" paired with "tearle", "kick" with "tic". Pairs now come from a common-word list with a blocklist.
+- Could ElevenLabs speech-to-text grade a child's attempt? It caught every real-word swap, but given the expected word, it rewrote 4 of 8 made-up errors like "tayak" as correct. That hides the very mistakes that matter, so Your turn stays record and play back.
+
+### What I learned
+
+Phonetics hides in plain sight. Vocalic r is a vowel in ARPAbet. Plural s is usually /z/. A dictionary catches these every time and a language model catches them most of the time, which is not good enough for therapy. The model proposes, the dictionary decides.
 
 ## What's next
 
-Print-ready card sheets, a pass through the dictionary's alternate pronunciations, and a speaking-rate control on the ElevenLabs voice for younger kids.
+- An on-device hint for therapists only: "we heard T AY T, the target was K AY T." Never a grade shown to a child.
+- Dialect options and the dictionary's alternate pronunciations.
+- Pictures for every word, and share links that carry an exact word list to a family.
 
 ## Disclosure
 
-Built with Claude Code from a written spec and milestone plan. Runtime uses Claude Haiku 4.5 and ElevenLabs. Verification is deterministic. Minnow is a drafting tool, not a clinical instrument, and it handles no patient or child data. Voice audio generated with ElevenLabs (elevenlabs.io).
+Built with Claude Code from my written spec. Minnow runs on Claude Haiku 4.5 and ElevenLabs; pictures were made once with Nano Banana 2 via kie.ai. Verification and minimal pairs are deterministic. Minnow is a practice tool, not a clinical instrument, and collects no patient or child data. Voice audio generated with ElevenLabs (elevenlabs.io).
